@@ -3,6 +3,146 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+<<<<<<< HEAD
+use App\Models\Payment;
+use Illuminate\Support\Facades\Storage;
+
+class DownloadController extends Controller
+{
+    public function downloadAIChatbotPackage(Request $request)
+    {
+        // For demo purposes, skip payment validation
+        // In production, you would validate the payment
+        
+        // $paymentId = $request->query('payment_id');
+        // $payment = Payment::where('payment_id', $paymentId)
+        //                  ->where('status', 'completed')
+        //                  ->firstOrFail();
+        
+        // Generate download token
+        $token = $this->generateDownloadToken();
+        
+        // Return the AI chatbot package
+        $filePath = storage_path('app/ai-chatbot-package.zip');
+        
+        if (!file_exists($filePath)) {
+            // Create the package if it doesn't exist
+            $this->createAIChatbotPackage();
+        }
+        
+        return response()->download($filePath, 'bizflow-ai-chatbot-package.zip', [
+            'Content-Type' => 'application/zip',
+            'X-Download-Token' => $token,
+        ]);
+    }
+    
+    public function downloadInstallationGuide(Request $request)
+    {
+        // For demo purposes, skip payment validation
+        // $paymentId = $request->query('payment_id');
+        // $payment = Payment::where('payment_id', $paymentId)
+        //                  ->where('status', 'completed')
+        //                  ->firstOrFail();
+        
+        // Generate PDF using simple HTML response for demo
+        // In production, use DomPDF or similar
+        $pdfContent = $this->generateInstallationGuidePDF();
+        
+        return response($pdfContent, 200, [
+            'Content-Type' => 'application/pdf',
+            'Content-Disposition' => 'attachment; filename="AI-Chatbot-Installation-Guide.pdf"',
+        ]);
+    }
+    
+    private function generateDownloadToken()
+    {
+        return hash('sha256', 'demo_token' . config('app.key') . time());
+    }
+    
+    private function createAIChatbotPackage()
+    {
+        // Create a simple demo ZIP file
+        $zip = new \ZipArchive();
+        $zipPath = storage_path('app/ai-chatbot-package.zip');
+        
+        if ($zip->open($zipPath, \ZipArchive::CREATE) === TRUE) {
+            // Add a readme file
+            $zip->addFromString('README.txt', 
+                "BizFlow AI Chatbot Package\n" .
+                "==========================\n\n" .
+                "Thank you for purchasing our AI Chatbot!\n\n" .
+                "Installation Instructions:\n" .
+                "1. Upload the chatbot files to your website\n" .
+                "2. Add the provided script tag to your HTML\n" .
+                "3. Configure the chatbot settings\n" .
+                "4. Test the functionality\n\n" .
+                "For support: support@bizflowai.com"
+            );
+            
+            // Add a demo script file
+            $zip->addFromString('chatbot.js', 
+                "// BizFlow AI Chatbot\n" .
+                "console.log('AI Chatbot loaded successfully!');"
+            );
+            
+            $zip->close();
+        }
+    }
+    
+    private function generateInstallationGuidePDF()
+    {
+        // For demo purposes, return a simple HTML that browsers can "print as PDF"
+        // In production, use DomPDF: https://github.com/dompdf/dompdf
+        
+        $html = "
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <title>AI Chatbot Installation Guide</title>
+            <style>
+                body { font-family: Arial, sans-serif; margin: 40px; }
+                h1 { color: #036ceb; }
+                .step { margin: 20px 0; }
+                .code { background: #f5f5f5; padding: 10px; border-left: 4px solid #036ceb; }
+            </style>
+        </head>
+        <body>
+            <h1>AI Chatbot Installation Guide</h1>
+            <p>Thank you for purchasing the BizFlow AI Chatbot!</p>
+            
+            <div class='step'>
+                <h2>Step 1: Add Script to Your Website</h2>
+                <p>Add this code before the closing &lt;/body&gt; tag:</p>
+                <div class='code'>
+                    &lt;script src='https://cdn.bizflowai.com/chatbot/v1.0/widget.js'&gt;&lt;/script&gt;
+                </div>
+            </div>
+            
+            <div class='step'>
+                <h2>Step 2: Configure the Chatbot</h2>
+                <p>Add configuration options:</p>
+                <div class='code'>
+                    &lt;script&gt;<br>
+                    window.chatbotConfig = {<br>
+                    &nbsp;&nbsp;theme: 'light',<br>
+                    &nbsp;&nbsp;position: 'bottom-right'<br>
+                    };<br>
+                    &lt;/script&gt;
+                </div>
+            </div>
+            
+            <div class='step'>
+                <h2>Step 3: Test Installation</h2>
+                <p>Refresh your website and look for the chatbot icon.</p>
+            </div>
+            
+            <p><strong>Support:</strong> support@bizflowai.com</p>
+        </body>
+        </html>
+        ";
+        
+        return $html;
+=======
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Response;
 use ZipArchive;
@@ -64,5 +204,6 @@ class DownloadController extends Controller
 
         // ✅ Step 6: Download response
         return Response::download($zipPath)->deleteFileAfterSend(true);
+>>>>>>> 6a21fed7f7ff83d705f194ef929999fb894554c9
     }
 }

@@ -14,7 +14,10 @@ class Business extends Model
 
     protected $fillable = [
         'user_id',
+<<<<<<< HEAD
+=======
         'logo',
+>>>>>>> 6a21fed7f7ff83d705f194ef929999fb894554c9
         'name',
         'industry',
         'target',
@@ -84,6 +87,8 @@ class Business extends Model
     }
 
     /**
+<<<<<<< HEAD
+=======
      * Get the website settings for the business.
      */
     public function websiteSettings(): HasOne
@@ -92,12 +97,15 @@ class Business extends Model
     }
 
     /**
+>>>>>>> 6a21fed7f7ff83d705f194ef929999fb894554c9
      * Get the business's primary color with fallback.
      */
     public function getColorAttribute($value)
     {
         return $value ?: '#3A86FF'; // Default color
     }
+<<<<<<< HEAD
+=======
 
     /**
      * Generate API key for the website
@@ -138,4 +146,5 @@ class Business extends Model
     {
         return $this->websiteSettings()->firstOrCreate([]);
     }
+>>>>>>> 6a21fed7f7ff83d705f194ef929999fb894554c9
 }

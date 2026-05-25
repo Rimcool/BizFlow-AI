@@ -651,6 +651,66 @@
                 This is a preview of how your website will look. Click the button below to visit your live website.
             </div>
             
+<<<<<<< HEAD
+            <div class="website-preview">
+                <div class="preview-website">
+                    <div class="website-header">
+                        <div class="logo">{{ $business->name }}</div>
+                        <div class="nav-links">
+                            <a href="#">Home</a>
+                            <a href="#">Products</a>
+                            <a href="#">About</a>
+                            <a href="#">Contact</a>
+                        </div>
+                    </div>
+                    
+                    <div class="hero-section">
+                        <h1>Welcome to {{ $business->name }}</h1>
+                        <p>Your premier destination for {{ $business->products }}</p>
+                        <button class="btn-primary">Shop Now</button>
+                    </div>
+                    
+                    <div class="content-section">
+                        <div class="content-card">
+                            <h3><i class="fas fa-box-open"></i> Our Products</h3>
+                            <p>Discover our collection of {{ $business->products }} designed for {{ $business->target }}.</p>
+                        </div>
+                        <div class="content-card">
+                            <h3><i class="fas fa-star"></i> Why Choose Us</h3>
+                            <p>We specialize in providing exceptional quality for the {{ $business->industry }} industry.</p>
+                        </div>
+                        <div class="content-card">
+                            <h3><i class="fas fa-shipping-fast"></i> Fast Shipping</h3>
+                            <p>We deliver anywhere with our reliable shipping partners.</p>
+                        </div>
+                        <div class="content-card">
+                            <h3><i class="fas fa-headset"></i> 24/7 Support</h3>
+                            <p>Our customer service team is always here to help you.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- PDF Download Section -->
+                    <div class="pdf-section">
+                        <h3><i class="fas fa-file-pdf"></i> Complete Business Growth Package</h3>
+                        <p>We've created a comprehensive business growth package specifically for your {{ $business->industry }} business. Download everything you need to start growing your online presence.</p>
+                        
+                        <div class="pdf-features">
+                            <div class="pdf-feature">Your Generated Website</div>
+                            <div class="pdf-feature">SEO Strategy Guide</div>
+                            <div class="pdf-feature">Marketing Strategy Guide</div>
+                            <div class="pdf-feature">Business Growth Plan</div>
+                            <div class="pdf-feature">Social Media Templates</div>
+                            <div class="pdf-feature">Performance Tracking Tools</div>
+                        </div>
+                    </div>
+                    
+                    <div class="website-footer">
+                        <p>© 2023 {{ $business->name }}. All rights reserved.</p>
+                    </div>
+                </div>
+            </div>
+            
+=======
            <!-- Update this section in your preview page -->
 <div class="website-header">
     <div class="logo">
@@ -671,26 +731,36 @@
         <a href="#">Contact</a>
     </div>
 </div>
+>>>>>>> 6a21fed7f7ff83d705f194ef929999fb894554c9
             <div class="button-container">
                <a href="{{ url('sites/'.$business->id) }}" class="btn-visit" target="_blank">
     <i class="fas fa-external-link-alt"></i> Visit Your Live Website
 </a>
                 
+<<<<<<< HEAD
+                <button id="downloadAllBtn" class="btn-download-all">
+                    <i class="fas fa-download"></i> Download Complete Business Package
+                </button>
+=======
                 <a href="{{ route('dashboard.download-package', $business->id) }}" 
    class="btn-download-all"
    onclick="showDownloadMessage()">
    <i class="fas fa-download"></i> Download Complete Business Package
 </a>
+>>>>>>> 6a21fed7f7ff83d705f194ef929999fb894554c9
 
                 <a href="/ai-chatbot-package" class="btn-ai-package">
         <i class="fas fa-robot"></i> Get AI Chatbot Package ($3)
     </a> 
 
+<<<<<<< HEAD
+=======
     <!-- Add this button to your preview page button container -->
 <a href="{{ route('dashboard.show', $business->id) }}" class="btn-visit" style="background: var(--success-color);">
     <i class="fas fa-cog"></i> Access Admin Dashboard
 </a>
 
+>>>>>>> 6a21fed7f7ff83d705f194ef929999fb894554c9
                 <p class="button-description">
                     Get your website, SEO guide, marketing plan, and business growth strategy all in one download.
                 </p>

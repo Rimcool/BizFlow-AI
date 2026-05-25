@@ -25,7 +25,10 @@ use App\Http\Controllers\SiteGeneratorController;
 use App\Http\Controllers\JazzCashController;
 use App\Http\Controllers\EasyPaisaController;
 use App\Http\Controllers\DownloadController;
+<<<<<<< HEAD
+=======
 use App\Http\Controllers\WebsiteApiController;
+>>>>>>> 6a21fed7f7ff83d705f194ef929999fb894554c9
 
 
 /*
@@ -182,6 +185,8 @@ Route::post('/payment/easypaisa/callback', [PaymentController::class, 'easypaisa
 Route::get('/download/ai-chatbot-package', [DownloadController::class, 'downloadAIChatbotPackage'])->name('download.ai.chatbot');
 Route::get('/download/installation-guide', [DownloadController::class, 'downloadInstallationGuide'])->name('download.installation.guide');
 
+<<<<<<< HEAD
+=======
 
 // ...existing code...
 
@@ -237,3 +242,4 @@ Route::get('/download-chatbot', function () {
 })->name('download.chatbot');
 
 // routes/web.php
+>>>>>>> 6a21fed7f7ff83d705f194ef929999fb894554c9

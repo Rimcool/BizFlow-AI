@@ -9,6 +9,8 @@
     <style>
         /* Template-specific CSS will be injected here */
         {!! $templateStyles !!}
+<<<<<<< HEAD
+=======
         
         /* Add Checkout & Thank You Styles */
         .checkout-section, .thank-you-section {
@@ -263,12 +265,16 @@
                 flex-direction: column;
             }
         }
+>>>>>>> 6a21fed7f7ff83d705f194ef929999fb894554c9
     </style>
 </head>
 <body>
     <!-- Navigation -->
     <nav class="navbar">
         <div class="nav-container">
+<<<<<<< HEAD
+            <div class="logo">{{ $business->name }}</div>
+=======
             <div class="logo-container">
             @if(isset($content['has_logo']) && $content['has_logo'])
                 <img src="{{ $content['logo'] }}" alt="{{ $business->name }} Logo" class="business-logo">
@@ -277,6 +283,7 @@
             @endif
             </div>
             
+>>>>>>> 6a21fed7f7ff83d705f194ef929999fb894554c9
             <ul class="nav-menu">
                 <li><a href="#home" class="nav-link">Home</a></li>
                 <li><a href="#products" class="nav-link">Products</a></li>
@@ -292,6 +299,12 @@
     </nav>
 
     <!-- Main Content -->
+<<<<<<< HEAD
+    <main>
+        @yield('content')
+    </main>
+
+=======
     <main id="main-content">
         @yield('content')
     </main>
@@ -440,6 +453,7 @@
         </div>
     </section>
 
+>>>>>>> 6a21fed7f7ff83d705f194ef929999fb894554c9
     <!-- Footer -->
     <footer class="footer">
         <div class="footer-container">
@@ -486,7 +500,10 @@
 
     <!-- JavaScript -->
     <script>
+<<<<<<< HEAD
+=======
         // Your existing JavaScript code remains the same...
+>>>>>>> 6a21fed7f7ff83d705f194ef929999fb894554c9
         // Ecommerce functionality
         let cart = [];
         const cartIcon = document.getElementById('cart-icon');
@@ -496,7 +513,10 @@
         const cartItems = document.getElementById('cart-items');
         const cartTotal = document.getElementById('cart-total');
         const cartCount = document.querySelector('.cart-count');
+<<<<<<< HEAD
+=======
         const mainContent = document.getElementById('main-content');
+>>>>>>> 6a21fed7f7ff83d705f194ef929999fb894554c9
 
         // Cart functionality
         cartIcon.addEventListener('click', () => {
@@ -583,6 +603,8 @@
             });
         }
 
+<<<<<<< HEAD
+=======
         // Checkout functionality
         const checkoutSection = document.getElementById('checkout');
         const thankYouSection = document.getElementById('thank-you');
@@ -711,6 +733,7 @@
             });
         });
 
+>>>>>>> 6a21fed7f7ff83d705f194ef929999fb894554c9
         // Form validation
         document.addEventListener('DOMContentLoaded', function() {
             const contactForm = document.getElementById('contactForm');

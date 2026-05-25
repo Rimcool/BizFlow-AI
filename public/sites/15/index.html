@@ -1,0 +1,1730 @@
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // FAQ toggle
+    const faqQuestions = document.querySelectorAll('.faq-question');
+    faqQuestions.forEach(question => {
+        question.addEventListener('click', () => {
+            const item = question.parentElement;
+            item.classList.toggle('faq-active');
+        });
+    });
+});
+</script>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>vintager - Beauty</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Template-specific CSS will be injected here */
+        
+        :root {
+            --primary-color: beige;
+            --secondary-color: #A52A2A;
+            --accent-color: #D2691E;
+            --text-color: #654321;
+            --light-color: #F5F5DC;
+            --dark-color: #8B4513;
+            --border-radius: 4px;
+            --shadow: 0 4px 12px rgba(139, 69, 19, 0.15);
+            --transition: all 0.3s ease;
+            --vintage-gradient: linear-gradient(135deg, #8B4513 0%, #A52A2A 50%, #D2691E 100%);
+            --paper-texture: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='1' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100' height='100' filter='url(%23noise)' opacity='0.1'/%3E%3C/svg%3E");
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Playfair Display", "Cormorant Garamond", serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background: var(--light-color);
+            overflow-x: hidden;
+            background-image: var(--paper-texture);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Navigation */
+        .navbar {
+            background: rgba(245, 245, 220, 0.95);
+            backdrop-filter: blur(5px);
+            padding: 1.5rem 0;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            transition: var(--transition);
+            border-bottom: 1px solid rgba(139, 69, 19, 0.1);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 2.2rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            letter-spacing: 1px;
+            font-style: italic;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 500;
+            font-size: 1.1rem;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .nav-link:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background: var(--primary-color);
+            transition: var(--transition);
+        }
+
+        .nav-link:hover:after {
+            width: 100%;
+        }
+
+        .nav-link:hover {
+            color: var(--primary-color);
+        }
+
+        .cart-icon {
+            position: relative;
+            cursor: pointer;
+            font-size: 1.3rem;
+            color: var(--text-color);
+            transition: var(--transition);
+        }
+
+        .cart-icon:hover {
+            color: var(--primary-color);
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: var(--accent-color);
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            font-weight: 600;
+        }
+
+        /* Hero Section */
+        .vintage-hero {
+            background: linear-gradient(135deg, rgba(139, 69, 19, 0.9) 0%, rgba(165, 42, 42, 0.8) 100%);
+            color: #F5F5DC;
+            padding: 12rem 0 8rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 600px;
+            text-align: center;
+        }
+
+        .vintage-hero h1 {
+            font-size: 3.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+            font-family: "Cormorant Garamond", serif;
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            font-weight: 400;
+            font-style: italic;
+        }
+
+        .hero-description {
+            font-size: 1.1rem;
+            margin-bottom: 3rem;
+            opacity: 0.9;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+        }
+
+        .btn {
+            padding: 1.2rem 2.5rem;
+            border: none;
+            border-radius: var(--border-radius);
+            font-weight: 500;
+            text-decoration: none;
+            transition: var(--transition);
+            cursor: pointer;
+            font-size: 1rem;
+            display: inline-block;
+            font-family: inherit;
+        }
+
+        .btn-primary {
+            background: var(--primary-color);
+            color: #F5F5DC;
+            border: 1px solid #A52A2A;
+        }
+
+        .btn-primary:hover {
+            background: #A52A2A;
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: #F5F5DC;
+            border: 2px solid #F5F5DC;
+        }
+
+        .btn-secondary:hover {
+            background: #F5F5DC;
+            color: var(--primary-color);
+            transform: translateY(-2px);
+        }
+
+        .hero-visual {
+            position: absolute;
+            right: 5%;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 40%;
+            opacity: 0.7;
+        }
+
+        .vintage-elements {
+            position: relative;
+            height: 300px;
+        }
+
+        .ornamental-border {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 250px;
+            height: 250px;
+            border: 2px solid #F5F5DC;
+            border-radius: 50%;
+            opacity: 0.5;
+        }
+
+        .ornamental-border:before {
+            content: "";
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            right: 10px;
+            bottom: 10px;
+            border: 1px solid #F5F5DC;
+            border-radius: 50%;
+        }
+
+        .vintage-flourish {
+            position: absolute;
+            width: 80px;
+            height: 80px;
+            border: 2px solid #F5F5DC;
+            border-radius: 50%;
+            opacity: 0.3;
+        }
+
+        .vintage-flourish:nth-child(2) {
+            top: 20px;
+            right: 50px;
+            transform: rotate(45deg);
+        }
+
+        .vintage-flourish:nth-child(3) {
+            bottom: 20px;
+            left: 50px;
+            transform: rotate(-45deg);
+        }
+
+        .paper-texture {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: var(--paper-texture);
+            opacity: 0.1;
+            pointer-events: none;
+        }
+
+        /* Section Headers */
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+            position: relative;
+        }
+
+        .section-header:after {
+            content: "";
+            position: absolute;
+            bottom: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background: var(--primary-color);
+        }
+
+        .section-title {
+            font-size: 2.8rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            font-family: "Cormorant Garamond", serif;
+        }
+
+        .section-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-color);
+            font-weight: 400;
+            font-style: italic;
+        }
+
+        /* Products Section */
+        .products {
+            padding: 6rem 0;
+            background: var(--light-color);
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            position: relative;
+            border: 1px solid rgba(139, 69, 19, 0.1);
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(139, 69, 19, 0.2);
+        }
+
+        .vintage-badge {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: var(--primary-color);
+            color: #F5F5DC;
+            padding: 0.5rem 1rem;
+            border-radius: 3px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            z-index: 2;
+            font-style: italic;
+        }
+
+        .product-image-container {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .polaroid-frame {
+            background: white;
+            padding: 15px 15px 40px 15px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            transition: var(--transition);
+            filter: sepia(0.3);
+        }
+
+        .product-card:hover .product-image {
+            transform: scale(1.05);
+            filter: sepia(0.5);
+        }
+
+        .polaroid-label {
+            text-align: center;
+            margin-top: 10px;
+            font-family: "Cursive", "Dancing Script", cursive;
+            color: var(--text-color);
+            font-size: 1.1rem;
+        }
+
+        .product-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(139, 69, 19, 0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: var(--transition);
+        }
+
+        .product-card:hover .product-overlay {
+            opacity: 1;
+        }
+
+        .quick-view {
+            background: #F5F5DC;
+            color: var(--primary-color);
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            font-weight: 600;
+            transition: var(--transition);
+            font-family: inherit;
+        }
+
+        .quick-view:hover {
+            background: var(--primary-color);
+            color: #F5F5DC;
+        }
+
+        .product-info {
+            padding: 2rem;
+        }
+
+        .product-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--primary-color);
+            font-family: "Cormorant Garamond", serif;
+        }
+
+        .product-description {
+            color: var(--text-color);
+            margin-bottom: 1.5rem;
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        .vintage-features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .vintage-tag {
+            background: rgba(139, 69, 19, 0.1);
+            color: var(--primary-color);
+            padding: 0.3rem 0.8rem;
+            border-radius: 3px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            border: 1px solid rgba(139, 69, 19, 0.2);
+        }
+
+        .product-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .product-price {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        .add-to-cart {
+            background: var(--primary-color);
+            color: #F5F5DC;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            font-weight: 600;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-family: inherit;
+        }
+
+        .add-to-cart:hover {
+            background: #A52A2A;
+            transform: translateY(-2px);
+        }
+
+        /* Craftsmanship Section */
+        .craftsmanship {
+            padding: 5rem 0;
+            background: rgba(139, 69, 19, 0.05);
+        }
+
+        .craftsmanship-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .craftsmanship-item {
+            text-align: center;
+            padding: 2.5rem 1.5rem;
+            background: white;
+            border-radius: var(--border-radius);
+            transition: var(--transition);
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(139, 69, 19, 0.1);
+        }
+
+        .craftsmanship-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(139, 69, 19, 0.15);
+        }
+
+        .craft-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--primary-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            font-size: 2rem;
+            color: #F5F5DC;
+        }
+
+        .craftsmanship-item h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+            font-family: "Cormorant Garamond", serif;
+        }
+
+        .craftsmanship-item p {
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        /* About Section */
+        .about {
+            padding: 6rem 0;
+            background: var(--light-color);
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-content {
+            padding-right: 2rem;
+        }
+
+        .about-description {
+            color: var(--text-color);
+            margin-bottom: 2rem;
+            line-height: 1.8;
+            font-size: 1.1rem;
+        }
+
+        .heritage-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .heritage-stat {
+            text-align: center;
+            padding: 1.5rem;
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(139, 69, 19, 0.1);
+        }
+
+        .stat-number {
+            display: block;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: var(--text-color);
+        }
+
+        .about-visual {
+            position: relative;
+        }
+
+        .vintage-frame {
+            padding: 20px;
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(139, 69, 19, 0.1);
+            position: relative;
+        }
+
+        .photo-corner {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            border: 2px solid var(--primary-color);
+        }
+
+        .photo-corner:nth-child(1) {
+            top: 10px;
+            left: 10px;
+            border-right: none;
+            border-bottom: none;
+        }
+
+        .photo-corner:nth-child(2) {
+            top: 10px;
+            right: 10px;
+            border-left: none;
+            border-bottom: none;
+        }
+
+        .photo-corner:nth-child(3) {
+            bottom: 10px;
+            left: 10px;
+            border-right: none;
+            border-top: none;
+        }
+
+        .photo-corner:nth-child(4) {
+            bottom: 10px;
+            right: 10px;
+            border-left: none;
+            border-top: none;
+        }
+
+        .vintage-frame img {
+            width: 100%;
+            border-radius: 2px;
+            filter: sepia(0.3);
+        }
+
+        /* Testimonials Section */
+        .testimonials {
+            padding: 5rem 0;
+            background: rgba(139, 69, 19, 0.05);
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 2rem;
+        }
+
+        .testimonial-item {
+            background: white;
+            padding: 2.5rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            border: 1px solid rgba(139, 69, 19, 0.1);
+            position: relative;
+        }
+
+        .testimonial-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(139, 69, 19, 0.15);
+        }
+
+        .testimonial-content {
+            color: var(--text-color);
+            font-style: italic;
+            margin-bottom: 2rem;
+            line-height: 1.8;
+            font-size: 1.1rem;
+            position: relative;
+        }
+
+        .testimonial-content:before {
+            content: '"';
+            font-size: 4rem;
+            color: var(--primary-color);
+            opacity: 0.2;
+            position: absolute;
+            top: -20px;
+            left: -10px;
+        }
+
+        .testimonial-author h4 {
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+            font-family: "Cormorant Garamond", serif;
+        }
+
+        .testimonial-author p {
+            color: var(--text-color);
+            font-size: 0.9rem;
+        }
+
+        /* FAQ Section */
+        .faq {
+            padding: 6rem 0;
+            background: var(--light-color);
+        }
+
+        .faq-grid {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            background: white;
+            border-radius: var(--border-radius);
+            margin-bottom: 1rem;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            border: 1px solid rgba(139, 69, 19, 0.1);
+        }
+
+        .faq-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(139, 69, 19, 0.1);
+        }
+
+        .faq-question {
+            padding: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            font-weight: 600;
+            color: var(--primary-color);
+            background: white;
+        }
+
+        .faq-answer {
+            padding: 0 1.5rem 1.5rem;
+            display: none;
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        .faq-active .faq-answer {
+            display: block;
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: 6rem 0;
+            background: rgba(139, 69, 19, 0.05);
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+        }
+
+        .contact-info-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 2.5rem;
+        }
+
+        .contact-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--primary-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1.5rem;
+            color: #F5F5DC;
+            font-size: 1.2rem;
+        }
+
+        .contact-details h4 {
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+            font-family: "Cormorant Garamond", serif;
+        }
+
+        .contact-details p {
+            color: var(--text-color);
+        }
+
+        .contact-form {
+            background: white;
+            padding: 2.5rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(139, 69, 19, 0.1);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 1rem;
+            border: 1px solid rgba(139, 69, 19, 0.2);
+            border-radius: var(--border-radius);
+            background: #F5F5DC;
+            color: var(--text-color);
+            font-family: inherit;
+            transition: var(--transition);
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 2px rgba(139, 69, 19, 0.2);
+        }
+
+        .form-group textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .submit-btn {
+            background: var(--primary-color);
+            color: #F5F5DC;
+            border: none;
+            padding: 1.2rem 2.5rem;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            font-weight: 600;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-family: inherit;
+        }
+
+        .submit-btn:hover {
+            background: #A52A2A;
+            transform: translateY(-2px);
+        }
+
+        /* Newsletter Section */
+        .newsletter {
+            background: linear-gradient(135deg, rgba(139, 69, 19, 0.9) 0%, rgba(165, 42, 42, 0.8) 100%);
+            color: #F5F5DC;
+            padding: 5rem 0;
+            text-align: center;
+        }
+
+        .newsletter-content {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .newsletter h2 {
+            font-size: 2.8rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+            font-family: "Cormorant Garamond", serif;
+        }
+
+        .newsletter p {
+            margin-bottom: 2.5rem;
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .newsletter-input-group {
+            display: flex;
+            max-width: 400px;
+            margin: 0 auto;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+
+        .newsletter-input-group input {
+            flex: 1;
+            padding: 1rem;
+            border: none;
+            background: #F5F5DC;
+            color: var(--text-color);
+            font-family: inherit;
+        }
+
+        .newsletter-input-group button {
+            padding: 1rem 1.5rem;
+            background: var(--primary-color);
+            color: #F5F5DC;
+            border: none;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-family: inherit;
+        }
+
+        .newsletter-input-group button:hover {
+            background: #A52A2A;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--primary-color);
+            color: #F5F5DC;
+            padding: 4rem 0 2rem;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-section h3 {
+            color: #F5F5DC;
+            margin-bottom: 1.5rem;
+            font-size: 1.2rem;
+            font-family: "Cormorant Garamond", serif;
+        }
+
+        .footer-section p,
+        .footer-section a {
+            color: rgba(245, 245, 220, 0.8);
+            margin-bottom: 0.8rem;
+            display: block;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-section a:hover {
+            color: #F5F5DC;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(245, 245, 220, 0.2);
+            color: rgba(245, 245, 220, 0.7);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .about-grid,
+            .contact-grid {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+            
+            .about-content {
+                padding-right: 0;
+            }
+            
+            .hero-visual {
+                display: none;
+            }
+            
+            .hero-content {
+                max-width: 100%;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .vintage-hero {
+                padding: 8rem 0 4rem;
+            }
+            
+            .vintage-hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero-actions {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .heritage-stats {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            
+            .testimonials-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .vintage-hero h1 {
+                font-size: 2rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .product-footer {
+                flex-direction: column;
+                gap: 1rem;
+                align-items: flex-start;
+            }
+            
+            .add-to-cart {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">vintager</div>
+            <ul class="nav-menu">
+                <li><a href="#home" class="nav-link">Home</a></li>
+                <li><a href="#products" class="nav-link">Products</a></li>
+                <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#faq" class="nav-link">FAQ</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+                <li class="cart-icon" id="cart-icon">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count">0</span>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main>
+            <!-- Hero Section -->
+    <section class="vintage-hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>vintager</h1>
+                <p class="hero-subtitle">Timeless Beauty with Classic Charm</p>
+                <p class="hero-description">Authentic craftsmanship for females who appreciate the elegance of yesteryear</p>
+                <div class="hero-actions">
+                    <a href="#products" class="btn btn-primary">Discover Collection</a>
+                    <a href="#about" class="btn btn-secondary">Our Heritage</a>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="vintage-elements">
+                    <div class="ornamental-border"></div>
+                    <div class="vintage-flourish"></div>
+                    <div class="vintage-flourish"></div>
+                </div>
+            </div>
+        </div>
+        <div class="paper-texture"></div>
+    </section>
+
+    <!-- Products Section -->
+    <section id="products" class="products">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Timeless Collection</h2>
+                <p class="section-subtitle">Curated pieces with enduring charm and character</p>
+            </div>
+            <div class="products-grid">
+                                
+                                                <div class="product-card" data-color="8B4513">
+                    <div class="vintage-badge">Vintage</div>
+                    <div class="product-image-container">
+                        <div class="polaroid-frame">
+                            <img src="https://via.placeholder.com/400x300/8B4513/FFFFFF?text=candles" alt="candles" class="product-image">
+                            <div class="polaroid-label">candles</div>
+                        </div>
+                        <div class="product-overlay">
+                            <button class="quick-view">Quick View</button>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">candles</h3>
+                        <p class="product-description">Beautifully crafted Beauty piece with vintage charm</p>
+                        <div class="vintage-features">
+                            <span class="vintage-tag">Handcrafted</span>
+                            <span class="vintage-tag">Authentic</span>
+                            <span class="vintage-tag">Classic</span>
+                        </div>
+                        <div class="product-footer">
+                            <p class="product-price">$80.00</p>
+                            <button class="add-to-cart" 
+                                    data-product="candles" 
+                                    data-price="58"
+                                    data-image="https://via.placeholder.com/400x300/8B4513/FFFFFF?text=candles">
+                                <i class="fas fa-history"></i>
+                                Add to Cart
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                                                <div class="product-card" data-color="A52A2A">
+                    <div class="vintage-badge">Vintage</div>
+                    <div class="product-image-container">
+                        <div class="polaroid-frame">
+                            <img src="https://via.placeholder.com/400x300/A52A2A/FFFFFF?text=lamp" alt="lamp" class="product-image">
+                            <div class="polaroid-label">lamp</div>
+                        </div>
+                        <div class="product-overlay">
+                            <button class="quick-view">Quick View</button>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">lamp</h3>
+                        <p class="product-description">Beautifully crafted Beauty piece with vintage charm</p>
+                        <div class="vintage-features">
+                            <span class="vintage-tag">Handcrafted</span>
+                            <span class="vintage-tag">Authentic</span>
+                            <span class="vintage-tag">Classic</span>
+                        </div>
+                        <div class="product-footer">
+                            <p class="product-price">$177.00</p>
+                            <button class="add-to-cart" 
+                                    data-product="lamp" 
+                                    data-price="103"
+                                    data-image="https://via.placeholder.com/400x300/A52A2A/FFFFFF?text=lamp">
+                                <i class="fas fa-history"></i>
+                                Add to Cart
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                                                <div class="product-card" data-color="CD853F">
+                    <div class="vintage-badge">Vintage</div>
+                    <div class="product-image-container">
+                        <div class="polaroid-frame">
+                            <img src="https://via.placeholder.com/400x300/CD853F/FFFFFF?text=books" alt="books" class="product-image">
+                            <div class="polaroid-label">books</div>
+                        </div>
+                        <div class="product-overlay">
+                            <button class="quick-view">Quick View</button>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">books</h3>
+                        <p class="product-description">Beautifully crafted Beauty piece with vintage charm</p>
+                        <div class="vintage-features">
+                            <span class="vintage-tag">Handcrafted</span>
+                            <span class="vintage-tag">Authentic</span>
+                            <span class="vintage-tag">Classic</span>
+                        </div>
+                        <div class="product-footer">
+                            <p class="product-price">$175.00</p>
+                            <button class="add-to-cart" 
+                                    data-product="books" 
+                                    data-price="119"
+                                    data-image="https://via.placeholder.com/400x300/CD853F/FFFFFF?text=books">
+                                <i class="fas fa-history"></i>
+                                Add to Cart
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                                                <div class="product-card" data-color="D2691E">
+                    <div class="vintage-badge">Vintage</div>
+                    <div class="product-image-container">
+                        <div class="polaroid-frame">
+                            <img src="https://via.placeholder.com/400x300/D2691E/FFFFFF?text=Antique+candles" alt="Antique candles" class="product-image">
+                            <div class="polaroid-label">Antique candles</div>
+                        </div>
+                        <div class="product-overlay">
+                            <button class="quick-view">Quick View</button>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Antique candles</h3>
+                        <p class="product-description">Beautifully crafted Beauty piece with vintage charm</p>
+                        <div class="vintage-features">
+                            <span class="vintage-tag">Handcrafted</span>
+                            <span class="vintage-tag">Authentic</span>
+                            <span class="vintage-tag">Classic</span>
+                        </div>
+                        <div class="product-footer">
+                            <p class="product-price">$127.00</p>
+                            <button class="add-to-cart" 
+                                    data-product="Antique candles" 
+                                    data-price="154"
+                                    data-image="https://via.placeholder.com/400x300/D2691E/FFFFFF?text=Antique+candles">
+                                <i class="fas fa-history"></i>
+                                Add to Cart
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                                                <div class="product-card" data-color="B8860B">
+                    <div class="vintage-badge">Vintage</div>
+                    <div class="product-image-container">
+                        <div class="polaroid-frame">
+                            <img src="https://via.placeholder.com/400x300/B8860B/FFFFFF?text=Retro+candles" alt="Retro candles" class="product-image">
+                            <div class="polaroid-label">Retro candles</div>
+                        </div>
+                        <div class="product-overlay">
+                            <button class="quick-view">Quick View</button>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Retro candles</h3>
+                        <p class="product-description">Beautifully crafted Beauty piece with vintage charm</p>
+                        <div class="vintage-features">
+                            <span class="vintage-tag">Handcrafted</span>
+                            <span class="vintage-tag">Authentic</span>
+                            <span class="vintage-tag">Classic</span>
+                        </div>
+                        <div class="product-footer">
+                            <p class="product-price">$121.00</p>
+                            <button class="add-to-cart" 
+                                    data-product="Retro candles" 
+                                    data-price="48"
+                                    data-image="https://via.placeholder.com/400x300/B8860B/FFFFFF?text=Retro+candles">
+                                <i class="fas fa-history"></i>
+                                Add to Cart
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                                                <div class="product-card" data-color="BC8F8F">
+                    <div class="vintage-badge">Vintage</div>
+                    <div class="product-image-container">
+                        <div class="polaroid-frame">
+                            <img src="https://via.placeholder.com/400x300/BC8F8F/FFFFFF?text=Timeless+candles" alt="Timeless candles" class="product-image">
+                            <div class="polaroid-label">Timeless candles</div>
+                        </div>
+                        <div class="product-overlay">
+                            <button class="quick-view">Quick View</button>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Timeless candles</h3>
+                        <p class="product-description">Beautifully crafted Beauty piece with vintage charm</p>
+                        <div class="vintage-features">
+                            <span class="vintage-tag">Handcrafted</span>
+                            <span class="vintage-tag">Authentic</span>
+                            <span class="vintage-tag">Classic</span>
+                        </div>
+                        <div class="product-footer">
+                            <p class="product-price">$62.00</p>
+                            <button class="add-to-cart" 
+                                    data-product="Timeless candles" 
+                                    data-price="143"
+                                    data-image="https://via.placeholder.com/400x300/BC8F8F/FFFFFF?text=Timeless+candles">
+                                <i class="fas fa-history"></i>
+                                Add to Cart
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                            </div>
+        </div>
+    </section>
+
+    <!-- Craftsmanship Section -->
+    <section class="craftsmanship">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Artisan Craftsmanship</h2>
+                <p class="section-subtitle">Preserving traditional techniques for modern appreciation</p>
+            </div>
+            <div class="craftsmanship-grid">
+                <div class="craftsmanship-item">
+                    <div class="craft-icon">
+                        <i class="fas fa-hand-sparkles"></i>
+                    </div>
+                    <h3>Handcrafted Quality</h3>
+                    <p>Each piece meticulously crafted using time-honored techniques</p>
+                </div>
+                <div class="craftsmanship-item">
+                    <div class="craft-icon">
+                        <i class="fas fa-leaf"></i>
+                    </div>
+                    <h3>Natural Materials</h3>
+                    <p>Using only the finest natural materials sourced sustainably</p>
+                </div>
+                <div class="craftsmanship-item">
+                    <div class="craft-icon">
+                        <i class="fas fa-award"></i>
+                    </div>
+                    <h3>Time-Tested</h3>
+                    <p>Designs that have stood the test of time and trends</p>
+                </div>
+                <div class="craftsmanship-item">
+                    <div class="craft-icon">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <h3>Made with Love</h3>
+                    <p>Every piece created with passion and attention to detail</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <div class="about-grid">
+                <div class="about-content">
+                    <h2 class="section-title">Our Heritage</h2>
+                    <p class="about-description">
+                        vintager was established with a reverence for the past and a commitment to preserving 
+                        the artistry of traditional Beauty. Our journey began with a simple belief: 
+                        that true beauty withstands the passage of time.
+                    </p>
+                    <p class="about-description">
+                        Each candles , lamp , books in our collection tells a story of craftsmanship, heritage, and 
+                        the enduring appeal of designs that have graced homes for generations.
+                    </p>
+                    <div class="heritage-stats">
+                        <div class="heritage-stat">
+                            <span class="stat-number">Est.</span>
+                            <span class="stat-label">Since 1972</span>
+                        </div>
+                        <div class="heritage-stat">
+                            <span class="stat-number">100%</span>
+                            <span class="stat-label">Handcrafted</span>
+                        </div>
+                        <div class="heritage-stat">
+                            <span class="stat-number">3rd Gen.</span>
+                            <span class="stat-label">Family Owned</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-visual">
+                    <div class="vintage-frame">
+                        <div class="photo-corner"></div>
+                        <div class="photo-corner"></div>
+                        <div class="photo-corner"></div>
+                        <div class="photo-corner"></div>
+                        <img src="https://via.placeholder.com/500x400/8B4513/FFFFFF?text=Est.+1972" alt="vintager Heritage">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Cherished Reviews</h2>
+                <p class="section-subtitle">What our discerning clientele appreciates</p>
+            </div>
+            <div class="testimonials-grid">
+                <div class="testimonial-item">
+                    <div class="testimonial-content">
+                        <p>"The candles , lamp , books from vintager possess a warmth and character that modern pieces simply cannot replicate. Each item feels like a treasure with its own story to tell."</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <h4>Eleanor West</h4>
+                        <p>Antique Collector</p>
+                    </div>
+                </div>
+                <div class="testimonial-item">
+                    <div class="testimonial-content">
+                        <p>"I've been searching for authentic candles , lamp , books that honor traditional craftsmanship. vintager delivers exactly that – quality that hearkens back to a time when things were built to last."</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <h4>Arthur Pendleton</h4>
+                        <p>Historic Home Owner</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq" class="faq">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Heritage Questions</h2>
+                <p class="section-subtitle">Answers about our vintage collection and craftsmanship</p>
+            </div>
+            
+            <div class="faq-grid">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Are your products authentic vintage or reproductions?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>We offer both authentic vintage pieces and carefully crafted reproductions. Each product is clearly marked with its origin story. Our reproductions are made using traditional techniques to capture the authentic feel of vintage candles , lamp , books.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>How do you source your materials?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>We source materials from reputable suppliers who share our commitment to quality and sustainability. For restoration pieces, we often salvage materials from period-correct sources to maintain historical accuracy.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Do you offer restoration services?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Yes, we provide expert restoration services for vintage candles , lamp , books. Our craftsmen use period-appropriate techniques to preserve the integrity and value of your cherished pieces while ensuring they remain functional for modern use.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>How do I care for vintage products?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Each piece comes with specific care instructions tailored to its materials and age. Generally, we recommend gentle cleaning with appropriate products, avoiding direct sunlight, and maintaining stable humidity levels to preserve your vintage items for years to come.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Visit Our Studio</h2>
+                <p class="section-subtitle">We'd be delighted to share our passion with you</p>
+            </div>
+            
+            <div class="contact-grid">
+                <div class="contact-info">
+                    <div class="contact-info-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h4>Correspondence</h4>
+                            <p>vintager@gmail.com</p>
+                        </div>
+                    </div>
+                    <div class="contact-info-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h4>Telephone</h4>
+                            <p>(555) 123-VINTAGE</p>
+                        </div>
+                    </div>
+                    <div class="contact-info-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h4>Studio Address</h4>
+                            <p>123 Heritage Lane<br>Artisan District, VT 05401</p>
+                        </div>
+                    </div>
+                    <div class="contact-info-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h4>Visiting Hours</h4>
+                            <p>Tuesday - Saturday: 10AM - 6PM<br>By Appointment on Sunday & Monday</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="contact-form-container">
+                    <form id="contactForm" class="contact-form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <input type="text" placeholder="Your Name" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="email" placeholder="Email Address" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" placeholder="Subject" required>
+                        </div>
+                        <div class="form-group">
+                            <textarea placeholder="Your Message" rows="5" required></textarea>
+                        </div>
+                        <button type="submit" class="submit-btn">
+                            <i class="fas fa-feather"></i>
+                            Send Message
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section class="newsletter">
+        <div class="container">
+            <div class="newsletter-content">
+                <h2>Join Our Gazette</h2>
+                <p>Receive updates on new arrivals, restoration tips, and heritage stories</p>
+                <form class="newsletter-form" id="newsletterForm">
+                    <div class="newsletter-input-group">
+                        <input type="email" placeholder="Enter your email address" required>
+                        <button type="submit">
+                            <i class="fas fa-paper-plane"></i>
+                            Subscribe
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3>vintager</h3>
+                <p>Providing quality candles , lamp , books for females.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <a href="#home">Home</a>
+                <a href="#products">Products</a>
+                <a href="#about">About</a>
+                <a href="#contact">Contact</a>
+            </div>
+            <div class="footer-section">
+                <h3>Contact Info</h3>
+                <p>Email: vintager@gmail.com</p>
+                <p>Phone: (555) 123-4567</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 vintager. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Shopping Cart Sidebar -->
+    <div class="cart-sidebar" id="cart-sidebar">
+        <div class="cart-header">
+            <h3>Your Cart</h3>
+            <button id="close-cart">&times;</button>
+        </div>
+        <div class="cart-items" id="cart-items">
+            <!-- Cart items will be added here dynamically -->
+        </div>
+        <div class="cart-total">
+            <span>Total:</span>
+            <span id="cart-total">$0.00</span>
+        </div>
+        <button class="checkout-btn">Proceed to Checkout</button>
+    </div>
+
+    <!-- Overlay -->
+    <div class="overlay" id="overlay"></div>
+
+    <!-- JavaScript -->
+    <script>
+        // Ecommerce functionality
+        let cart = [];
+        const cartIcon = document.getElementById('cart-icon');
+        const cartSidebar = document.getElementById('cart-sidebar');
+        const closeCart = document.getElementById('close-cart');
+        const overlay = document.getElementById('overlay');
+        const cartItems = document.getElementById('cart-items');
+        const cartTotal = document.getElementById('cart-total');
+        const cartCount = document.querySelector('.cart-count');
+
+        // Cart functionality
+        cartIcon.addEventListener('click', () => {
+            cartSidebar.classList.add('open');
+            overlay.style.display = 'block';
+        });
+
+        closeCart.addEventListener('click', () => {
+            cartSidebar.classList.remove('open');
+            overlay.style.display = 'none';
+        });
+
+        overlay.addEventListener('click', () => {
+            cartSidebar.classList.remove('open');
+            overlay.style.display = 'none';
+        });
+
+        // Add to cart functionality
+        document.addEventListener('click', (e) => {
+            if (e.target.classList.contains('add-to-cart')) {
+                const product = e.target.dataset.product;
+                const price = parseFloat(e.target.dataset.price);
+                const image = e.target.dataset.image;
+                
+                const existingItem = cart.find(item => item.product === product);
+                
+                if (existingItem) {
+                    existingItem.quantity += 1;
+                } else {
+                    cart.push({
+                        product,
+                        price,
+                        image,
+                        quantity: 1
+                    });
+                }
+                
+                updateCart();
+                
+                // Show cart sidebar
+                cartSidebar.classList.add('open');
+                overlay.style.display = 'block';
+            }
+        });
+
+        function updateCart() {
+            // Clear cart items
+            cartItems.innerHTML = '';
+            
+            let total = 0;
+            let count = 0;
+            
+            // Add items to cart
+            cart.forEach(item => {
+                const itemTotal = item.price * item.quantity;
+                total += itemTotal;
+                count += item.quantity;
+                
+                const cartItem = document.createElement('div');
+                cartItem.className = 'cart-item';
+                cartItem.innerHTML = `
+                    <img src="${item.image}" alt="${item.product}" class="cart-item-image">
+                    <div class="cart-item-details">
+                        <h4>${item.product}</h4>
+                        <p>$${item.price} x ${item.quantity}</p>
+                    </div>
+                    <button class="cart-item-remove" data-product="${item.product}">&times;</button>
+                `;
+                
+                cartItems.appendChild(cartItem);
+            });
+            
+            // Update total and count
+            cartTotal.textContent = `$${total.toFixed(2)}`;
+            cartCount.textContent = count;
+            
+            // Add event listeners to remove buttons
+            document.querySelectorAll('.cart-item-remove').forEach(button => {
+                button.addEventListener('click', () => {
+                    const product = button.dataset.product;
+                    cart = cart.filter(item => item.product !== product);
+                    updateCart();
+                });
+            });
+        }
+
+        // Form validation
+        document.addEventListener('DOMContentLoaded', function() {
+            const contactForm = document.getElementById('contactForm');
+            if (contactForm) {
+                contactForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    alert('Thank you for your message! We will get back to you soon.');
+                    this.reset();
+                });
+            }
+
+            const newsletterForm = document.getElementById('newsletterForm');
+            if (newsletterForm) {
+                newsletterForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    alert('Thank you for subscribing to our newsletter!');
+                    this.reset();
+                });
+            }
+
+            // FAQ functionality
+            document.querySelectorAll('.faq-question').forEach(question => {
+                question.addEventListener('click', () => {
+                    const item = question.parentElement;
+                    item.classList.toggle('faq-active');
+                });
+            });
+        });
+    </script>
+</body>
+</html>

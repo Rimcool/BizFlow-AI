@@ -1,0 +1,1633 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>chotu bites - Food &amp; Beverage</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Template-specific CSS will be injected here */
+        
+        :root {
+            --primary-color: red;
+            --secondary-color: #FFD1DC;
+            --accent-color: #D8BFD8;
+            --text-color: #8A5C7D;
+            --light-color: #FFF0F5;
+            --dark-color: #FF69B4;
+            --border-radius: 25px;
+            --shadow: 0 8px 25px rgba(255, 182, 193, 0.2);
+            --transition: all 0.3s ease;
+            --gradient: linear-gradient(135deg, red 0%, #FFD1DC 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Dancing Script', 'Playfair Display', cursive, serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background: var(--light-color);
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Navigation */
+        .navbar {
+            background: rgba(255, 240, 245, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1.5rem 0;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            transition: var(--transition);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--dark-color);
+            letter-spacing: 1px;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .nav-link:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 3px;
+            bottom: -5px;
+            left: 0;
+            background: var(--dark-color);
+            transition: var(--transition);
+            border-radius: 2px;
+        }
+
+        .nav-link:hover:after {
+            width: 100%;
+        }
+
+        .nav-link:hover {
+            color: var(--dark-color);
+            transform: translateY(-2px);
+        }
+
+        .cart-icon {
+            position: relative;
+            cursor: pointer;
+            font-size: 1.5rem;
+            color: var(--text-color);
+            transition: var(--transition);
+        }
+
+        .cart-icon:hover {
+            color: var(--dark-color);
+            transform: scale(1.1);
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: var(--dark-color);
+            color: var(--light-color);
+            border-radius: 50%;
+            width: 22px;
+            height: 22px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: 700;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: var(--gradient);
+            color: var(--text-color);
+            padding: 12rem 0 8rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .brand-name {
+            background: linear-gradient(45deg, var(--dark-color), var(--text-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-subtitle {
+            font-size: 1.4rem;
+            margin-bottom: 3rem;
+            color: var(--text-color);
+            font-weight: 500;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .btn {
+            padding: 1.2rem 2.5rem;
+            border: none;
+            border-radius: 50px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: var(--transition);
+            cursor: pointer;
+            font-size: 1.1rem;
+            letter-spacing: 0.5px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .btn-primary {
+            background: var(--dark-color);
+            color: var(--light-color);
+            animation: bounce 2s infinite;
+        }
+
+        .btn-primary:hover {
+            background: #FF1493;
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 10px 25px rgba(255, 20, 147, 0.3);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--text-color);
+            border: 3px solid var(--text-color);
+        }
+
+        .btn-secondary:hover {
+            background: var(--text-color);
+            color: var(--light-color);
+            transform: translateY(-3px);
+        }
+
+        .hero-visual {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+        }
+
+        .floating-hearts {
+            position: relative;
+            height: 300px;
+        }
+
+        .heart {
+            position: absolute;
+            font-size: 2rem;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .heart-1 {
+            top: 20px;
+            left: 50px;
+            animation-delay: 0s;
+        }
+
+        .heart-2 {
+            top: 80px;
+            right: 30px;
+            animation-delay: 1s;
+        }
+
+        .heart-3 {
+            bottom: 40px;
+            left: 30px;
+            animation-delay: 2s;
+        }
+
+        .heart-4 {
+            bottom: 20px;
+            right: 60px;
+            animation-delay: 3s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(10deg); }
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
+        }
+
+        /* Section Headers */
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-title {
+            font-size: 3.2rem;
+            font-weight: 700;
+            color: var(--text-color);
+            margin-bottom: 1rem;
+        }
+
+        .section-subtitle {
+            font-size: 1.3rem;
+            color: var(--text-color);
+            font-weight: 500;
+        }
+
+        /* Products Section */
+        .products {
+            padding: 6rem 0;
+            background: var(--light-color);
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .product-card {
+            background: var(--light-color);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            position: relative;
+            border: 3px solid transparent;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(255, 182, 193, 0.3);
+            border-color: var(--primary-color);
+        }
+
+        .product-image-container {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .product-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .product-card:hover .product-image {
+            transform: scale(1.1);
+        }
+
+        .product-emoji {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            font-size: 2rem;
+            animation: bounce 2s infinite;
+        }
+
+        .product-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: var(--dark-color);
+            color: var(--light-color);
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            animation: pulse 2s infinite;
+        }
+
+        .product-info {
+            padding: 2rem;
+        }
+
+        .product-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--text-color);
+        }
+
+        .product-description {
+            color: var(--text-color);
+            margin-bottom: 1.5rem;
+            font-size: 1rem;
+        }
+
+        .product-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .product-price {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--dark-color);
+        }
+
+        .add-to-cart {
+            background: var(--primary-color);
+            color: var(--text-color);
+            border: none;
+            padding: 1rem 1.5rem;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 700;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .add-to-cart:hover {
+            background: var(--dark-color);
+            color: var(--light-color);
+            transform: translateY(-2px) scale(1.05);
+            box-shadow: 0 5px 15px rgba(255, 105, 180, 0.3);
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        /* Features Section */
+        .features {
+            padding: 5rem 0;
+            background: var(--light-color);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-item {
+            text-align: center;
+            padding: 2.5rem 1.5rem;
+            background: var(--light-color);
+            border-radius: var(--border-radius);
+            transition: var(--transition);
+            box-shadow: var(--shadow);
+            border: 2px solid transparent;
+        }
+
+        .feature-item:hover {
+            transform: translateY(-5px) rotate(2deg);
+            box-shadow: 0 15px 30px rgba(255, 182, 193, 0.3);
+            border-color: var(--primary-color);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            animation: bounce 2s infinite;
+        }
+
+        .feature-item h3 {
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+            color: var(--text-color);
+            font-weight: 700;
+        }
+
+        .feature-item p {
+            color: var(--text-color);
+            line-height: 1.6;
+            font-size: 1rem;
+        }
+
+        /* About Section */
+        .about {
+            padding: 6rem 0;
+            background: var(--gradient);
+            color: var(--text-color);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .about-content {
+            padding-right: 2rem;
+        }
+
+        .about-description {
+            margin-bottom: 2rem;
+            line-height: 1.8;
+            font-size: 1.1rem;
+        }
+
+        .girly-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .stat {
+            text-align: center;
+            padding: 1.5rem;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: var(--border-radius);
+            backdrop-filter: blur(10px);
+        }
+
+        .stat-number {
+            display: block;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+        }
+
+        .about-visual {
+            position: relative;
+        }
+
+        .sparkle-overlay {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-image: radial-gradient(circle, var(--light-color) 2px, transparent 2px);
+            background-size: 30px 30px;
+            animation: sparkle 10s linear infinite;
+            opacity: 0.3;
+        }
+
+        .about-image {
+            width: 100%;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            position: relative;
+            z-index: 1;
+            border: 5px solid var(--light-color);
+        }
+
+        @keyframes sparkle {
+            0% { background-position: 0 0; }
+            100% { background-position: 0 1000px; }
+        }
+
+        /* FAQ Section */
+        .faq {
+            padding: 6rem 0;
+            background: var(--light-color);
+        }
+
+        .faq-grid {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            background: var(--light-color);
+            border-radius: var(--border-radius);
+            margin-bottom: 1.5rem;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            border-left: 5px solid var(--primary-color);
+        }
+
+        .faq-item:hover {
+            transform: translateY(-2px);
+            border-left-color: var(--dark-color);
+        }
+
+        .faq-question {
+            padding: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            font-weight: 700;
+            color: var(--text-color);
+            background: var(--light-color);
+        }
+
+        .faq-answer {
+            padding: 0 2rem 2rem;
+            display: none;
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        .faq-active .faq-answer {
+            display: block;
+        }
+
+        /* Testimonials Section */
+        .testimonials {
+            padding: 5rem 0;
+            background: var(--gradient);
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 2rem;
+        }
+
+        .testimonial-item {
+            background: var(--light-color);
+            padding: 2.5rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            border: 2px solid transparent;
+        }
+
+        .testimonial-item:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary-color);
+        }
+
+        .testimonial-content {
+            color: var(--text-color);
+            font-style: italic;
+            margin-bottom: 2rem;
+            line-height: 1.8;
+            font-size: 1.1rem;
+        }
+
+        .testimonial-author h4 {
+            color: var(--text-color);
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+
+        .testimonial-author p {
+            color: var(--text-color);
+            font-size: 0.9rem;
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: 6rem 0;
+            background: var(--light-color);
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+        }
+
+        .contact-info-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 2.5rem;
+        }
+
+        .contact-icon {
+            font-size: 2rem;
+            margin-right: 1.5rem;
+            animation: bounce 2s infinite;
+        }
+
+        .contact-details h4 {
+            color: var(--text-color);
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+
+        .contact-details p {
+            color: var(--text-color);
+        }
+
+        .contact-form {
+            background: var(--light-color);
+            padding: 2.5rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            border: 2px solid var(--primary-color);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #FFD1DC;
+            border-radius: var(--border-radius);
+            background: var(--light-color);
+            color: var(--text-color);
+            font-family: inherit;
+            transition: var(--transition);
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--dark-color);
+            box-shadow: 0 0 0 3px rgba(255, 182, 193, 0.3);
+        }
+
+        .form-group textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .submit-btn {
+            background: var(--dark-color);
+            color: var(--light-color);
+            border: none;
+            padding: 1.2rem 2.5rem;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 700;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .submit-btn:hover {
+            background: #FF1493;
+            transform: translateY(-2px) scale(1.05);
+            box-shadow: 0 5px 15px rgba(255, 20, 147, 0.3);
+        }
+
+        /* Newsletter Section */
+        .newsletter {
+            background: var(--gradient);
+            color: var(--text-color);
+            padding: 5rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .newsletter-content {
+            max-width: 600px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .newsletter h2 {
+            font-size: 3.2rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .newsletter p {
+            margin-bottom: 2.5rem;
+            font-size: 1.2rem;
+        }
+
+        .newsletter-input-group {
+            display: flex;
+            max-width: 400px;
+            margin: 0 auto;
+            border-radius: 50px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .newsletter-input-group input {
+            flex: 1;
+            padding: 1.2rem;
+            border: none;
+            background: var(--light-color);
+            color: var(--text-color);
+        }
+
+        .newsletter-input-group button {
+            padding: 1.2rem 2rem;
+            background: var(--dark-color);
+            color: var(--light-color);
+            border: none;
+            cursor: pointer;
+            font-weight: 700;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .newsletter-input-group button:hover {
+            background: #FF1493;
+            transform: scale(1.05);
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--light-color);
+            color: var(--text-color);
+            padding: 4rem 0 2rem;
+            border-top: 2px solid var(--primary-color);
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-section h3 {
+            color: var(--text-color);
+            margin-bottom: 1.5rem;
+            font-size: 1.3rem;
+            font-weight: 700;
+        }
+
+        .footer-section p,
+        .footer-section a {
+            color: var(--text-color);
+            margin-bottom: 0.8rem;
+            display: block;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-section a:hover {
+            color: var(--dark-color);
+            transform: translateX(5px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid var(--primary-color);
+        }
+
+        /* Cart Sidebar */
+        .cart-sidebar {
+            position: fixed;
+            top: 0;
+            right: -400px;
+            width: 400px;
+            height: 100vh;
+            background: var(--light-color);
+            box-shadow: -5px 0 25px rgba(0,0,0,0.1);
+            transition: right 0.3s ease;
+            z-index: 1000;
+            overflow-y: auto;
+        }
+
+        .cart-sidebar.open {
+            right: 0;
+        }
+
+        .cart-header {
+            padding: 2rem;
+            border-bottom: 2px solid var(--primary-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: var(--gradient);
+            color: var(--text-color);
+        }
+
+        .cart-header h3 {
+            color: var(--text-color);
+            font-weight: 700;
+        }
+
+        #close-cart {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-color);
+        }
+
+        .cart-items {
+            padding: 1.5rem;
+        }
+
+        .cart-item {
+            display: flex;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 2px solid var(--primary-color);
+        }
+
+        .cart-item-image {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: var(--border-radius);
+            margin-right: 1.5rem;
+        }
+
+        .cart-item-details {
+            flex: 1;
+        }
+
+        .cart-item-details h4 {
+            margin-bottom: 0.5rem;
+            color: var(--text-color);
+        }
+
+        .cart-item-remove {
+            background: none;
+            border: none;
+            color: #dc3545;
+            cursor: pointer;
+            font-size: 1.2rem;
+        }
+
+        .cart-total {
+            padding: 1.5rem;
+            border-top: 2px solid var(--primary-color);
+            display: flex;
+            justify-content: space-between;
+            font-weight: 700;
+            color: var(--text-color);
+            font-size: 1.3rem;
+        }
+
+        .checkout-btn {
+            display: block;
+            width: calc(100% - 3rem);
+            margin: 0 1.5rem 1.5rem;
+            padding: 1.2rem;
+            background: var(--dark-color);
+            color: var(--light-color);
+            border: none;
+            border-radius: 50px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .checkout-btn:hover {
+            background: #FF1493;
+            transform: translateY(-2px) scale(1.05);
+            box-shadow: 0 5px 15px rgba(255, 20, 147, 0.3);
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            display: none;
+            z-index: 999;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .hero-container {
+                grid-template-columns: 1fr;
+                text-align: center;
+                gap: 3rem;
+            }
+            
+            .about-grid,
+            .contact-grid {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+            
+            .about-content {
+                padding-right: 0;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero-actions {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .girly-stats {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            
+            .nav-menu {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+            
+            .cart-sidebar {
+                width: 100%;
+                right: -100%;
+            }
+            
+            .testimonials-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero {
+                padding: 8rem 0 4rem;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .section-title {
+                font-size: 2.2rem;
+            }
+            
+            .product-footer {
+                flex-direction: column;
+                gap: 1rem;
+                align-items: flex-start;
+            }
+            
+            .add-to-cart {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .floating-hearts {
+                display: none;
+            }
+            
+            .feature-icon {
+                font-size: 2.5rem;
+            }
+        }
+    
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">chotu bites</div>
+            <ul class="nav-menu">
+                <li><a href="#home" class="nav-link">Home</a></li>
+                <li><a href="#products" class="nav-link">Products</a></li>
+                <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#faq" class="nav-link">FAQ</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+                <li class="cart-icon" id="cart-icon">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count">0</span>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main>
+            <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-container">
+            <div class="hero-content">
+                <h1>Welcome to <span class="brand-name">chotu bites</span></h1>
+                <p class="hero-subtitle">Discover adorable mini burgers for teens</p>
+                <div class="hero-actions">
+                    <a href="#products" class="btn btn-primary">Shop Now 💖</a>
+                    <a href="#about" class="btn btn-secondary">Learn More ✨</a>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="floating-hearts">
+                    <div class="heart heart-1">💖</div>
+                    <div class="heart heart-2">✨</div>
+                    <div class="heart heart-3">🌸</div>
+                    <div class="heart heart-4">🎀</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section id="products" class="products">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Pretty Collection</h2>
+                <p class="section-subtitle">Adorable mini burgers you'll love</p>
+            </div>
+            <div class="products-grid">
+                                
+                                                <div class="product-card" data-color="FFB6C1">
+                    <div class="product-image-container">
+                        <img src="https://via.placeholder.com/400x300/FFB6C1/FFFFFF?text=mini+burgers" alt="mini burgers" class="product-image">
+                        <div class="product-emoji">💖</div>
+                        <div class="product-badge">New!</div>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">mini burgers 💖</h3>
+                        <p class="product-description">Super cute Food &amp; Beverage product</p>
+                        <div class="product-footer">
+                            <p class="product-price">$68.00</p>
+                            <button class="add-to-cart" 
+                                    data-product="mini burgers 💖" 
+                                    data-price="72"
+                                    data-image="https://via.placeholder.com/400x300/FFB6C1/FFFFFF?text=mini+burgers">
+                                <i class="fas fa-heart"></i>
+                                Add to Cart
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                                                <div class="product-card" data-color="FFD1DC">
+                    <div class="product-image-container">
+                        <img src="https://via.placeholder.com/400x300/FFD1DC/FFFFFF?text=Pretty+mini+burgers+%E2%9C%A8" alt="Pretty mini burgers ✨" class="product-image">
+                        <div class="product-emoji">✨</div>
+                        <div class="product-badge">New!</div>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Pretty mini burgers ✨ ✨</h3>
+                        <p class="product-description">Super cute Food &amp; Beverage product</p>
+                        <div class="product-footer">
+                            <p class="product-price">$41.00</p>
+                            <button class="add-to-cart" 
+                                    data-product="Pretty mini burgers ✨ ✨" 
+                                    data-price="86"
+                                    data-image="https://via.placeholder.com/400x300/FFD1DC/FFFFFF?text=Pretty+mini+burgers+%E2%9C%A8">
+                                <i class="fas fa-heart"></i>
+                                Add to Cart
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                                                <div class="product-card" data-color="FFC3A0">
+                    <div class="product-image-container">
+                        <img src="https://via.placeholder.com/400x300/FFC3A0/FFFFFF?text=Lovely+mini+burgers+%F0%9F%8C%B8" alt="Lovely mini burgers 🌸" class="product-image">
+                        <div class="product-emoji">🌸</div>
+                        <div class="product-badge">New!</div>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Lovely mini burgers 🌸 🌸</h3>
+                        <p class="product-description">Super cute Food &amp; Beverage product</p>
+                        <div class="product-footer">
+                            <p class="product-price">$42.00</p>
+                            <button class="add-to-cart" 
+                                    data-product="Lovely mini burgers 🌸 🌸" 
+                                    data-price="37"
+                                    data-image="https://via.placeholder.com/400x300/FFC3A0/FFFFFF?text=Lovely+mini+burgers+%F0%9F%8C%B8">
+                                <i class="fas fa-heart"></i>
+                                Add to Cart
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                                                <div class="product-card" data-color="D8BFD8">
+                    <div class="product-image-container">
+                        <img src="https://via.placeholder.com/400x300/D8BFD8/FFFFFF?text=Sweet+mini+burgers+%F0%9F%8E%80" alt="Sweet mini burgers 🎀" class="product-image">
+                        <div class="product-emoji">🎀</div>
+                        <div class="product-badge">New!</div>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Sweet mini burgers 🎀 🎀</h3>
+                        <p class="product-description">Super cute Food &amp; Beverage product</p>
+                        <div class="product-footer">
+                            <p class="product-price">$75.00</p>
+                            <button class="add-to-cart" 
+                                    data-product="Sweet mini burgers 🎀 🎀" 
+                                    data-price="58"
+                                    data-image="https://via.placeholder.com/400x300/D8BFD8/FFFFFF?text=Sweet+mini+burgers+%F0%9F%8E%80">
+                                <i class="fas fa-heart"></i>
+                                Add to Cart
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                                                <div class="product-card" data-color="B0E0E6">
+                    <div class="product-image-container">
+                        <img src="https://via.placeholder.com/400x300/B0E0E6/FFFFFF?text=Charming+mini+burgers+%F0%9F%A6%84" alt="Charming mini burgers 🦄" class="product-image">
+                        <div class="product-emoji">🦄</div>
+                        <div class="product-badge">New!</div>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Charming mini burgers 🦄 🦄</h3>
+                        <p class="product-description">Super cute Food &amp; Beverage product</p>
+                        <div class="product-footer">
+                            <p class="product-price">$39.00</p>
+                            <button class="add-to-cart" 
+                                    data-product="Charming mini burgers 🦄 🦄" 
+                                    data-price="81"
+                                    data-image="https://via.placeholder.com/400x300/B0E0E6/FFFFFF?text=Charming+mini+burgers+%F0%9F%A6%84">
+                                <i class="fas fa-heart"></i>
+                                Add to Cart
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                                                <div class="product-card" data-color="F0E68C">
+                    <div class="product-image-container">
+                        <img src="https://via.placeholder.com/400x300/F0E68C/FFFFFF?text=Adorable+mini+burgers+%F0%9F%92%95" alt="Adorable mini burgers 💕" class="product-image">
+                        <div class="product-emoji">💕</div>
+                        <div class="product-badge">New!</div>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Adorable mini burgers 💕 💕</h3>
+                        <p class="product-description">Super cute Food &amp; Beverage product</p>
+                        <div class="product-footer">
+                            <p class="product-price">$55.00</p>
+                            <button class="add-to-cart" 
+                                    data-product="Adorable mini burgers 💕 💕" 
+                                    data-price="78"
+                                    data-image="https://via.placeholder.com/400x300/F0E68C/FFFFFF?text=Adorable+mini+burgers+%F0%9F%92%95">
+                                <i class="fas fa-heart"></i>
+                                Add to Cart
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features">
+        <div class="container">
+            <div class="features-grid">
+                <div class="feature-item">
+                    <div class="feature-icon">💝</div>
+                    <h3>Pretty Packaging</h3>
+                    <p>Everything comes in beautiful, Instagram-worthy packaging</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">🚚</div>
+                    <h3>Fast Shipping</h3>
+                    <p>Quick delivery so you can enjoy your goodies sooner</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">💖</div>
+                    <h3>Made with Love</h3>
+                    <p>Every item is crafted with care and attention to detail</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">🎁</div>
+                    <h3>Free Surprises</h3>
+                    <p>Little extra treats in every order because you deserve it</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <div class="about-grid">
+                <div class="about-content">
+                    <h2 class="section-title">Our Story 💕</h2>
+                    <p class="about-description">
+                        chotu bites was created to bring more beauty and joy into the world! 
+                        We design mini burgers that make teens feel 
+                        special and celebrated every day.
+                    </p>
+                    <p class="about-description">
+                        Our mission is to spread happiness through our carefully curated collection 
+                        of products that are as functional as they are beautiful.
+                    </p>
+                    <div class="girly-stats">
+                        <div class="stat">
+                            <span class="stat-number">10K+</span>
+                            <span class="stat-label">Happy Customers</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-number">100%</span>
+                            <span class="stat-label">Love Guarantee</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-number">✨</span>
+                            <span class="stat-label">Sparkle Factor</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-visual">
+                    <div class="sparkle-overlay"></div>
+                    <img src="https://via.placeholder.com/500x400/FFB6C1/FFFFFF?text=Pretty+Products" alt="chotu bites" class="about-image">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq" class="faq">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Frequently Asked Questions 💭</h2>
+                <p class="section-subtitle">Everything you need to know about our pretty products</p>
+            </div>
+            
+            <div class="faq-grid">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Are your products really that cute? 🎀</span>
+                        <i class="fas fa-plus"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Absolutely! We design every product to be Instagram-worthy and heart-meltingly adorable. If it doesn't make you smile, we don't sell it!</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Do you offer gift wrapping? 🎁</span>
+                        <i class="fas fa-plus"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Yes! We offer complimentary gift wrapping with pretty ribbons and personalized notes. Perfect for making someone's day extra special!</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>What's your return policy? 🔄</span>
+                        <i class="fas fa-plus"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>We offer a 30-day happiness guarantee! If you're not completely delighted, we'll make it right. Your smile is our priority!</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Do you include freebies? 🎉</span>
+                        <i class="fas fa-plus"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Always! Every order includes at least one free surprise because we believe everyone deserves a little extra sparkle in their life!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Love Notes 💌</h2>
+                <p class="section-subtitle">What our lovely customers are saying</p>
+            </div>
+            <div class="testimonials-grid">
+                <div class="testimonial-item">
+                    <div class="testimonial-content">
+                        <p>"These mini burgers are absolutely adorable! The quality is amazing and they're even prettier in person. I'm obsessed! 💖"</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <h4>Sophia Rose</h4>
+                        <p>Beauty Blogger</p>
+                    </div>
+                </div>
+                <div class="testimonial-item">
+                    <div class="testimonial-content">
+                        <p>"I've never seen such cute mini burgers! The packaging alone is worth it, but the products themselves are even better! 🌸"</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <h4>Emma Sparkle</h4>
+                        <p>Lifestyle Influencer</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Let's Chat! 💬</h2>
+                <p class="section-subtitle">We'd love to hear from you</p>
+            </div>
+            
+            <div class="contact-grid">
+                <div class="contact-info">
+                    <div class="contact-info-item">
+                        <div class="contact-icon">📧</div>
+                        <div class="contact-details">
+                            <h4>Email</h4>
+                            <p>nimrashehad05@gmail.com</p>
+                        </div>
+                    </div>
+                    <div class="contact-info-item">
+                        <div class="contact-icon">📞</div>
+                        <div class="contact-details">
+                            <h4>Phone</h4>
+                            <p>(555) 123-CUTE</p>
+                        </div>
+                    </div>
+                    <div class="contact-info-item">
+                        <div class="contact-icon">💖</div>
+                        <div class="contact-details">
+                            <h4>Social Media</h4>
+                            <p>{{ str_replace(' ', '', strtolower($business->name)) }}</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="contact-form-container">
+                    <form id="contactForm" class="contact-form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <input type="text" placeholder="Your Name" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="email" placeholder="Email Address" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" placeholder="Subject" required>
+                        </div>
+                        <div class="form-group">
+                            <textarea placeholder="Your Lovely Message 💕" rows="5" required></textarea>
+                        </div>
+                        <button type="submit" class="submit-btn">
+                            <i class="fas fa-paper-plane"></i>
+                            Send Message
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section class="newsletter">
+        <div class="container">
+            <div class="newsletter-content">
+                <h2>Join the Girl Gang! 👯‍♀️</h2>
+                <p>Get exclusive updates, secret sales, and pretty surprises</p>
+                <form class="newsletter-form" id="newsletterForm">
+                    <div class="newsletter-input-group">
+                        <input type="email" placeholder="Enter your email address" required>
+                        <button type="submit">
+                            <i class="fas fa-heart"></i>
+                            Join Now
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3>chotu bites</h3>
+                <p>Providing quality mini burgers for teens.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <a href="#home">Home</a>
+                <a href="#products">Products</a>
+                <a href="#about">About</a>
+                <a href="#contact">Contact</a>
+            </div>
+            <div class="footer-section">
+                <h3>Contact Info</h3>
+                <p>Email: nimrashehad05@gmail.com</p>
+                <p>Phone: (555) 123-4567</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 chotu bites. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Shopping Cart Sidebar -->
+    <div class="cart-sidebar" id="cart-sidebar">
+        <div class="cart-header">
+            <h3>Your Cart</h3>
+            <button id="close-cart">&times;</button>
+        </div>
+        <div class="cart-items" id="cart-items">
+            <!-- Cart items will be added here dynamically -->
+        </div>
+        <div class="cart-total">
+            <span>Total:</span>
+            <span id="cart-total">$0.00</span>
+        </div>
+        <button class="checkout-btn">Proceed to Checkout</button>
+    </div>
+
+    <!-- Overlay -->
+    <div class="overlay" id="overlay"></div>
+
+    <!-- JavaScript -->
+    <script>
+        // Ecommerce functionality
+        let cart = [];
+        const cartIcon = document.getElementById('cart-icon');
+        const cartSidebar = document.getElementById('cart-sidebar');
+        const closeCart = document.getElementById('close-cart');
+        const overlay = document.getElementById('overlay');
+        const cartItems = document.getElementById('cart-items');
+        const cartTotal = document.getElementById('cart-total');
+        const cartCount = document.querySelector('.cart-count');
+
+        // Cart functionality
+        cartIcon.addEventListener('click', () => {
+            cartSidebar.classList.add('open');
+            overlay.style.display = 'block';
+        });
+
+        closeCart.addEventListener('click', () => {
+            cartSidebar.classList.remove('open');
+            overlay.style.display = 'none';
+        });
+
+        overlay.addEventListener('click', () => {
+            cartSidebar.classList.remove('open');
+            overlay.style.display = 'none';
+        });
+
+        // Add to cart functionality
+        document.addEventListener('click', (e) => {
+            if (e.target.classList.contains('add-to-cart')) {
+                const product = e.target.dataset.product;
+                const price = parseFloat(e.target.dataset.price);
+                const image = e.target.dataset.image;
+                
+                const existingItem = cart.find(item => item.product === product);
+                
+                if (existingItem) {
+                    existingItem.quantity += 1;
+                } else {
+                    cart.push({
+                        product,
+                        price,
+                        image,
+                        quantity: 1
+                    });
+                }
+                
+                updateCart();
+                
+                // Show cart sidebar
+                cartSidebar.classList.add('open');
+                overlay.style.display = 'block';
+            }
+        });
+
+        function updateCart() {
+            // Clear cart items
+            cartItems.innerHTML = '';
+            
+            let total = 0;
+            let count = 0;
+            
+            // Add items to cart
+            cart.forEach(item => {
+                const itemTotal = item.price * item.quantity;
+                total += itemTotal;
+                count += item.quantity;
+                
+                const cartItem = document.createElement('div');
+                cartItem.className = 'cart-item';
+                cartItem.innerHTML = `
+                    <img src="${item.image}" alt="${item.product}" class="cart-item-image">
+                    <div class="cart-item-details">
+                        <h4>${item.product}</h4>
+                        <p>$${item.price} x ${item.quantity}</p>
+                    </div>
+                    <button class="cart-item-remove" data-product="${item.product}">&times;</button>
+                `;
+                
+                cartItems.appendChild(cartItem);
+            });
+            
+            // Update total and count
+            cartTotal.textContent = `$${total.toFixed(2)}`;
+            cartCount.textContent = count;
+            
+            // Add event listeners to remove buttons
+            document.querySelectorAll('.cart-item-remove').forEach(button => {
+                button.addEventListener('click', () => {
+                    const product = button.dataset.product;
+                    cart = cart.filter(item => item.product !== product);
+                    updateCart();
+                });
+            });
+        }
+
+        // Form validation
+        document.addEventListener('DOMContentLoaded', function() {
+            const contactForm = document.getElementById('contactForm');
+            if (contactForm) {
+                contactForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    alert('Thank you for your message! We will get back to you soon.');
+                    this.reset();
+                });
+            }
+
+            const newsletterForm = document.getElementById('newsletterForm');
+            if (newsletterForm) {
+                newsletterForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    alert('Thank you for subscribing to our newsletter!');
+                    this.reset();
+                });
+            }
+
+            // FAQ functionality
+            document.querySelectorAll('.faq-question').forEach(question => {
+                question.addEventListener('click', () => {
+                    const item = question.parentElement;
+                    item.classList.toggle('faq-active');
+                });
+            });
+        });
+    </script>
+</body>
+</html>

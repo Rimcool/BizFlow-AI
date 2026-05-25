@@ -32,9 +32,30 @@ class AppServiceProvider extends ServiceProvider
      * Bootstrap any application services.
      */
     public function boot(): void
-    {
+    
         Schema::defaultStringLength(191);
 
-       
-    }
-}
+ 
+        view()->composer('*', function ($view) {
+            $business = null;
+
+            if (request()->route()) {
+                // Get parameter "business" (because route is /preview/{business})
+                $param = request()->route()->parameter('business');
+
+                if ($param) {
+                    // If it's already a Business model (route model binding), use it directly
+                    $business = $param instanceof \App\Models\Business
+                        ? $param
+                        : \App\Models\Business::find($param);
+                }
+            }
+
+            // Fallback → first business if nothing found
+            if (!$business) {
+                $business = \App\Models\Business::first();
+            }
+
+            $view->with('business', $business);
+        })
+ 

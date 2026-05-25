@@ -32,7 +32,11 @@ class GoogleController extends Controller
 
             if (!$user) {
                 $user = User::create([
+<<<<<<< HEAD
+                    'name'     => $googleUser->getName(),
+=======
                     //'name'     => $googleUser->getName(),
+>>>>>>> 6a21fed7f7ff83d705f194ef929999fb894554c9
                     'email'    => $googleUser->getEmail(),
                     'password' => bcrypt(Str::random(16)),
                 ]);

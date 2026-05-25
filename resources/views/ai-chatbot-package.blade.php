@@ -818,8 +818,13 @@
                 
                 alert(`Payment processed successfully via ${method.toUpperCase()}! Your AI chatbot package will be available for download shortly.`);
                 
+<<<<<<< HEAD
+                // Redirect to download page or thank you page
+                // window.location.href = 'download-page.html';
+=======
                 //#direct to download page or thank you page
                 // window.location.href = 'thank-you.blade.php';
+>>>>>>> 6a21fed7f7ff83d705f194ef929999fb894554c9
             }
         });
     </script>

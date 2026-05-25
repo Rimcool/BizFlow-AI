@@ -1,0 +1,31 @@
+:root {
+    --primary-color: #3A86FF;
+    --secondary-color: #00C896;
+    --accent-color: #FF8C42;
+    --dark-color: #2D3748;
+    --light-color: #F8FAFC;
+    --gray-color: #718096;
+    --success-color: #48BB78;
+    --warning-color: #ECC94B;
+    --danger-color: #F56565;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f5f7f9;
+    color: var(--dark-color);
+    line-height: 1.6;
+}
+
+.dashboard-container {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* Add all the CSS styles from the previous dashboard example here */

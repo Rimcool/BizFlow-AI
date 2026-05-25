@@ -514,7 +514,11 @@
   <nav class="navbar">
     <div style="display:flex; align-items:center; gap:10px;">
       <img src="images/logo.png" alt="BizFlow AI Logo">
+<<<<<<< HEAD
+      <h1 class="logo-text">BizFlow <span>AI</span></h1>
+=======
       <h1 class="logo-text">My<span>AI</span></h1>
+>>>>>>> 6a21fed7f7ff83d705f194ef929999fb894554c9
     </div>
     
     <div class="nav-links" style="display: flex; align-items: center; gap: 20px;">
@@ -643,8 +647,12 @@
   </section>
 
   <!-- Business Form Section -->
+<<<<<<< HEAD
+  <section id="formSection" class="form-section">
+=======
   <!-- Business Form Section -->
 <section id="formSection" class="form-section">
+>>>>>>> 6a21fed7f7ff83d705f194ef929999fb894554c9
     @if(session('success'))
       <div style="background:#d1e7dd;color:#0f5132;padding:10px;border-radius:6px;margin-bottom:20px;">
         {{ session('success') }}
@@ -668,6 +676,10 @@
     @endif
 
     <h3>Let's Build Your Business</h3>
+<<<<<<< HEAD
+    <form id="businessForm" action="{{ route('business.submit') }}" method="POST">
+      @csrf
+=======
     <form id="businessForm" action="{{ route('business.submit') }}" method="POST" enctype="multipart/form-data">
       @csrf
       
@@ -697,6 +709,7 @@
         </div>
       </div>
 
+>>>>>>> 6a21fed7f7ff83d705f194ef929999fb894554c9
       <!-- Business Name -->
       <div class="form-group">
         <label for="name">Business Name</label>
@@ -846,6 +859,9 @@
     form.style.display = 'block';
     form.scrollIntoView({ behavior: 'smooth' });
   }
+<<<<<<< HEAD
+
+=======
 // Logo upload functionality
 document.addEventListener('DOMContentLoaded', function() {
     const logoUploadBtn = document.getElementById('logoUploadBtn');
@@ -947,6 +963,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 });
+>>>>>>> 6a21fed7f7ff83d705f194ef929999fb894554c9
   // Check if user is logged in
   function isLoggedIn() {
     // This would typically be set by your backend

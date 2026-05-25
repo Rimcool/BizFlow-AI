@@ -1,9 +1,17 @@
 <?php
+<<<<<<< HEAD
+=======
 // app/Http/Controllers/AIChatbotController.php
+>>>>>>> 6a21fed7f7ff83d705f194ef929999fb894554c9
 
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+<<<<<<< HEAD
+
+class AIChatbotController extends Controller
+{
+=======
 use Illuminate\Support\Facades\Http;
 
 class AIChatbotController extends Controller
@@ -26,11 +34,31 @@ class AIChatbotController extends Controller
     /**
      * Show the package page
      */
+>>>>>>> 6a21fed7f7ff83d705f194ef929999fb894554c9
     public function showPackagePage()
     {
         return view('ai-chatbot-package');
     }
     
+<<<<<<< HEAD
+    public function showSupport()
+    {
+        return view('support');
+    }
+    
+    public function submitSupportRequest(Request $request)
+    {
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email',
+            'subject' => 'required|string|max:255',
+            'message' => 'required|string',
+        ]);
+        
+        // Process support request (send email, save to database, etc.)
+        
+        return redirect()->back()->with('success', 'Your support request has been submitted successfully!');
+=======
     /**
      * Process chat messages
      */
@@ -171,5 +199,6 @@ class AIChatbotController extends Controller
                 'error' => $e->getMessage()
             ], 500);
         }
+>>>>>>> 6a21fed7f7ff83d705f194ef929999fb894554c9
     }
 }

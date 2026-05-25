@@ -15,7 +15,11 @@ class MarketingPdfService
         $content = $this->generateMarketingContent($business);
         
         // Generate PDF
+<<<<<<< HEAD
+        $pdf = Pdf::loadView('pdfs.marketing-guide', [
+=======
         $pdf = Pdf::loadView('pdfs.marketing', [
+>>>>>>> 6a21fed7f7ff83d705f194ef929999fb894554c9
             'business' => $business,
             'content' => $content
         ]);

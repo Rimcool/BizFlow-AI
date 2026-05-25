@@ -1,0 +1,19 @@
+/* resources/css/app.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* === My Website Global Theme === */
+:root {
+  --primary-color: #3A86FF;
+  --secondary-color: #FF8C42;
+  --success-color: #00C896;
+  --text-dark: #111827;
+  --bg-light: #F9FAFB;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: var(--bg-light);
+  color: var(--text-dark);
+}

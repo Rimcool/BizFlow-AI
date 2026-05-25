@@ -46,7 +46,10 @@ class BusinessController extends Controller
             'products' => 'required|string',
             'goal' => 'required|string',
             'email' => 'required|email',
+<<<<<<< HEAD
+=======
             'logo' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+>>>>>>> 6a21fed7f7ff83d705f194ef929999fb894554c9
         ]);
 
         // Only add user_id if the user is authenticated
@@ -54,12 +57,15 @@ class BusinessController extends Controller
             $validated['user_id'] = auth()->id();
         }
 
+<<<<<<< HEAD
+=======
         // Handle logo upload
         if ($request->hasFile('logo')) {
             $logoPath = $request->file('logo')->store('logos', 'public');
             $validated['logo'] = basename($logoPath);
         }
 
+>>>>>>> 6a21fed7f7ff83d705f194ef929999fb894554c9
         $business = Business::create($validated);
 
         // Generate sample products FIRST (before website generation)
@@ -113,7 +119,11 @@ class BusinessController extends Controller
     public function showPreview(Business $business)
     {
         return view('preview-teaser', compact('business'));
+<<<<<<< HEAD
+    } 
+=======
     }
+>>>>>>> 6a21fed7f7ff83d705f194ef929999fb894554c9
     
     public function preview(Business $business)
     {
@@ -126,6 +136,30 @@ class BusinessController extends Controller
     }
 
     public function downloadMarketingGuide($id)
+<<<<<<< HEAD
+{
+    $business = Business::findOrFail($id);
+    $filename = "marketing-guides/{$business->id}-marketing-guide.pdf";
+    
+    // Check if file exists
+    if (!Storage::exists($filename)) {
+        // Generate the PDF if it doesn't exist
+        $pdfPath = $this->marketingPdfService->generateMarketingGuide($business);
+    } else {
+        $pdfPath = $filename;
+    }
+    
+    // Check again if file exists after generation attempt
+    if (Storage::exists($pdfPath)) {
+        return Storage::download($pdfPath, "{$business->name}-marketing-guide.pdf");
+    }
+    
+    // If PDF still doesn't exist, return an error
+    return response()->json([
+        'error' => 'Marketing guide not found. Please try again later.'
+    ], 404);
+}
+=======
     {
         $business = Business::findOrFail($id);
         $filename = "marketing-guides/{$business->id}-marketing-guide.pdf";
@@ -149,6 +183,7 @@ class BusinessController extends Controller
         ], 404);
     }
 
+>>>>>>> 6a21fed7f7ff83d705f194ef929999fb894554c9
     public function generateStaticSite(Business $business)
     {
         try {
@@ -178,6 +213,60 @@ class BusinessController extends Controller
             return back()->with('error', 'Failed to generate website: ' . $e->getMessage());
         }
     }
+<<<<<<< HEAD
+private function generateWebsiteContent(Business $business)
+{
+    return [
+        'hero_title' => "Welcome to {$business->name}",
+        'hero_tagline' => "Empowering {$business->target} with {$business->products}",
+        'about_text' => $this->generateAboutContent($business),
+        'cta_text' => "Get Started with {$business->name} today!",
+    ];
+}
+
+  private function performSiteGeneration(Business $business)
+{
+    $template = $this->selectTemplate($business);
+
+    // Get products for THIS business
+    $products = Product::where('business_id', $business->id)->get();
+
+    // Generate custom site content for THIS business
+    $websiteContent = $this->generateWebsiteContent($business);
+
+    // Render with THIS business's data
+    $rendered = view($template, [
+        'business' => $business,
+        'products' => $products,
+        'content' => $websiteContent,
+    ])->render();
+
+    // Create directory if it doesn't exist
+    $sitePath = public_path("sites/{$business->id}");
+    if (!file_exists($sitePath)) {
+        mkdir($sitePath, 0755, true);
+    }
+
+    // Save HTML file - overwrite if exists
+    file_put_contents("{$sitePath}/index.html", $rendered);
+
+    $siteUrl = url("sites/{$business->id}");
+
+    // Update or create in DB to ensure we have the latest data
+    GeneratedSite::updateOrCreate(
+        ['business_id' => $business->id],
+        [
+            'site_url' => $siteUrl,
+            'seo_plan' => $this->generateSeoPlan($business),
+            'marketing_plan' => $this->generateMarketingPlan($business),
+            'management_tips' => $this->generateManagementTips($business),
+            'chatbot_details' => $this->setupChatbot($business),
+        ]
+    );
+
+    return $siteUrl;
+}
+=======
 
     private function generateWebsiteContent(Business $business)
     {
@@ -242,6 +331,7 @@ class BusinessController extends Controller
 
         return $siteUrl;
     }
+>>>>>>> 6a21fed7f7ff83d705f194ef929999fb894554c9
 
     private function selectTemplate($business)
     {
@@ -302,6 +392,8 @@ class BusinessController extends Controller
         }
     }
 
+<<<<<<< HEAD
+=======
     private function getTemplateStyles($business)
     {
         $style = strtolower($business->style ?? '');
@@ -326,6 +418,7 @@ class BusinessController extends Controller
         return $styles;
     }
 
+>>>>>>> 6a21fed7f7ff83d705f194ef929999fb894554c9
     private function generateSampleProducts($business)
     {
         $products = explode(',', $business->products);
@@ -502,4 +595,8 @@ class BusinessController extends Controller
             ]
         ];
     }
+<<<<<<< HEAD
+
+=======
+>>>>>>> 6a21fed7f7ff83d705f194ef929999fb894554c9
 }

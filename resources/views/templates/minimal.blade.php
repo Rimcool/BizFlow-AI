@@ -634,6 +634,9 @@
             display: none;
             z-index: 999;
         }
+<<<<<<< HEAD
+
+=======
 /* Checkout Styles */
 .checkout-section {
     padding: 40px 0;
@@ -870,6 +873,7 @@
         flex-direction: column;
     }
 }
+>>>>>>> 6a21fed7f7ff83d705f194ef929999fb894554c9
         /* Responsive Design */
         @media (max-width: 768px) {
             .nav-menu {
@@ -903,7 +907,10 @@
                 border-radius: var(--border-radius);
                 padding: 0.8rem;
             }
+<<<<<<< HEAD
+=======
 
+>>>>>>> 6a21fed7f7ff83d705f194ef929999fb894554c9
         }
     ';
 @endphp

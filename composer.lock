@@ -4,7 +4,11 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
+<<<<<<< HEAD
+    "content-hash": "bcecc1af88a339f2de1623f2696f4b84",
+=======
     "content-hash": "69ade4bc9f8b8a9b5a43a679e84e398c",
+>>>>>>> 6a21fed7f7ff83d705f194ef929999fb894554c9
     "packages": [
         {
             "name": "anourvalar/eloquent-serialize",
@@ -1018,6 +1022,18 @@
         },
         {
             "name": "dompdf/dompdf",
+<<<<<<< HEAD
+            "version": "v3.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/dompdf/dompdf.git",
+                "reference": "a51bd7a063a65499446919286fb18b518177155a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/dompdf/dompdf/zipball/a51bd7a063a65499446919286fb18b518177155a",
+                "reference": "a51bd7a063a65499446919286fb18b518177155a",
+=======
             "version": "v3.1.2",
             "source": {
                 "type": "git",
@@ -1028,6 +1044,7 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/dompdf/dompdf/zipball/b3493e35d31a5e76ec24c3b64a29b0034b2f32a6",
                 "reference": "b3493e35d31a5e76ec24c3b64a29b0034b2f32a6",
+>>>>>>> 6a21fed7f7ff83d705f194ef929999fb894554c9
                 "shasum": ""
             },
             "require": {
@@ -1076,9 +1093,15 @@
             "homepage": "https://github.com/dompdf/dompdf",
             "support": {
                 "issues": "https://github.com/dompdf/dompdf/issues",
+<<<<<<< HEAD
+                "source": "https://github.com/dompdf/dompdf/tree/v3.1.0"
+            },
+            "time": "2025-01-15T14:09:04+00:00"
+=======
                 "source": "https://github.com/dompdf/dompdf/tree/v3.1.2"
             },
             "time": "2025-09-23T03:06:41+00:00"
+>>>>>>> 6a21fed7f7ff83d705f194ef929999fb894554c9
         },
         {
             "name": "dompdf/php-font-lib",

@@ -1,0 +1,1843 @@
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Animation on scroll
+    const aosElements = document.querySelectorAll('[data-aos]');
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('aos-animate');
+            }
+        });
+    }, { threshold: 0.1 });
+    
+    aosElements.forEach(el => observer.observe(el));
+    
+    // Counter animation for stats
+    const counters = document.querySelectorAll('.stat-number');
+    const speed = 200;
+    
+    counters.forEach(counter => {
+        const target = +counter.getAttribute('data-count');
+        const count = +counter.innerText;
+        const increment = target / speed;
+        
+        if (count < target) {
+            counter.innerText = Math.ceil(count + increment);
+            setTimeout(() => {
+                counter.innerText = target;
+            }, 2000);
+        }
+    });
+    
+    // FAQ toggle
+    const faqQuestions = document.querySelectorAll('.faq-question');
+    faqQuestions.forEach(question => {
+        question.addEventListener('click', () => {
+            const item = question.parentElement;
+            item.classList.toggle('faq-active');
+        });
+    });
+});
+</script>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>glower - Tech</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Template-specific CSS will be injected here */
+        
+        :root {
+            --primary-color: blue;
+            --secondary-color: #0D47A1;
+            --accent-color: #00E5FF;
+            --text-color: #E0E0E0;
+            --light-color: #121212;
+            --dark-color: #0A0A0A;
+            --border-radius: 8px;
+            --shadow: 0 8px 32px rgba(0,0,0,0.3);
+            --transition: all 0.3s ease;
+            --gradient: linear-gradient(135deg, blue 0%, #0D47A1 100%);
+            --tech-gradient: linear-gradient(135deg, #0D47A1 0%, #1976D2 50%, #2196F3 100%);
+            --glow: 0 0 20px rgba(33, 150, 243, 0.5);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background: var(--dark-color);
+            overflow-x: hidden;
+            background: linear-gradient(135deg, #0A0A0A 0%, #121212 100%);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Navigation */
+        .navbar {
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1.5rem 0;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            transition: var(--transition);
+            border-bottom: 1px solid rgba(33, 150, 243, 0.1);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 500;
+            font-size: 1.1rem;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .nav-link:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background: var(--primary-color);
+            transition: var(--transition);
+        }
+
+        .nav-link:hover:after {
+            width: 100%;
+        }
+
+        .nav-link:hover {
+            color: var(--primary-color);
+        }
+
+        .cart-icon {
+            position: relative;
+            cursor: pointer;
+            font-size: 1.3rem;
+            color: var(--text-color);
+            transition: var(--transition);
+        }
+
+        .cart-icon:hover {
+            color: var(--primary-color);
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: var(--accent-color);
+            color: var(--dark-color);
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            font-weight: 600;
+        }
+
+        /* Hero Section */
+        .tech-hero {
+            background: linear-gradient(135deg, #0A0A0A 0%, #121212 50%, #1A1A1A 100%);
+            color: white;
+            padding: 12rem 0 8rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 600px;
+        }
+
+        .tech-hero h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            font-weight: 400;
+            color: var(--text-color);
+        }
+
+        .hero-description {
+            font-size: 1.1rem;
+            margin-bottom: 3rem;
+            color: #B0B0B0;
+        }
+
+        .hero-actions {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .btn {
+            padding: 1.2rem 2.5rem;
+            border: none;
+            border-radius: var(--border-radius);
+            font-weight: 600;
+            text-decoration: none;
+            transition: var(--transition);
+            cursor: pointer;
+            font-size: 1rem;
+            display: inline-block;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .btn-primary {
+            background: var(--gradient);
+            color: white;
+            box-shadow: var(--glow);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(33, 150, 243, 0.4);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--primary-color);
+            border: 2px solid var(--primary-color);
+        }
+
+        .btn-secondary:hover {
+            background: var(--primary-color);
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        .hero-visual {
+            position: absolute;
+            right: 5%;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 40%;
+        }
+
+        .tech-animation {
+            position: relative;
+            height: 300px;
+            width: 300px;
+            margin: 0 auto;
+        }
+
+        .central-element {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80px;
+            height: 80px;
+            background: var(--gradient);
+            border-radius: 50%;
+            box-shadow: var(--glow);
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        .orbiting-circle {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            background: var(--accent-color);
+            border-radius: 50%;
+            animation: orbit 4s linear infinite;
+        }
+
+        .orbiting-circle:nth-child(1) {
+            animation-delay: 0s;
+            top: 0;
+            left: 135px;
+        }
+
+        .orbiting-circle:nth-child(2) {
+            animation-delay: 2s;
+            top: 135px;
+            left: 270px;
+        }
+
+        .grid-lines {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                linear-gradient(90deg, transparent 24px, rgba(33, 150, 243, 0.1) 25px, transparent 26px),
+                linear-gradient(180deg, transparent 24px, rgba(33, 150, 243, 0.1) 25px, transparent 26px);
+            background-size: 50px 50px;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: translate(-50%, -50%) scale(1); }
+            50% { transform: translate(-50%, -50%) scale(1.1); }
+        }
+
+        @keyframes orbit {
+            0% { transform: rotate(0deg) translateX(135px) rotate(0deg); }
+            100% { transform: rotate(360deg) translateX(135px) rotate(-360deg); }
+        }
+
+        .particles-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .particles-container:before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(2px 2px at 20px 30px, var(--primary-color), transparent),
+                radial-gradient(2px 2px at 40px 70px, var(--accent-color), transparent),
+                radial-gradient(1px 1px at 90px 40px, #fff, transparent),
+                radial-gradient(1px 1px at 130px 80px, var(--primary-color), transparent),
+                radial-gradient(2px 2px at 160px 30px, var(--accent-color), transparent);
+            background-repeat: repeat;
+            background-size: 200px 200px;
+            animation: particlesMove 20s linear infinite;
+        }
+
+        @keyframes particlesMove {
+            from { background-position: 0 0; }
+            to { background-position: 200px 200px; }
+        }
+
+        /* Section Headers */
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-title {
+            font-size: 2.8rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 1rem;
+        }
+
+        .section-subtitle {
+            font-size: 1.2rem;
+            color: #B0B0B0;
+            font-weight: 400;
+        }
+
+        /* Products Section */
+        .products {
+            padding: 6rem 0;
+            background: var(--dark-color);
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .product-card {
+            background: var(--light-color);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            position: relative;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4), var(--glow);
+            border-color: var(--primary-color);
+        }
+
+        .tech-badge {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: var(--accent-color);
+            color: var(--dark-color);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            z-index: 2;
+            text-transform: uppercase;
+        }
+
+        .product-image-container {
+            position: relative;
+            overflow: hidden;
+            height: 200px;
+            background: #1A1A1A;
+        }
+
+        .tech-image-placeholder {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .circuit-pattern {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                linear-gradient(90deg, transparent 24px, rgba(33, 150, 243, 0.1) 25px, transparent 26px),
+                linear-gradient(180deg, transparent 24px, rgba(33, 150, 243, 0.1) 25px, transparent 26px);
+            background-size: 50px 50px;
+            opacity: 0.5;
+        }
+
+        .glow-effect {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100px;
+            height: 100px;
+            background: radial-gradient(circle, var(--primary-color) 0%, transparent 70%);
+            opacity: 0.3;
+            animation: glowPulse 3s ease-in-out infinite;
+        }
+
+        @keyframes glowPulse {
+            0%, 100% { opacity: 0.3; transform: translate(-50%, -50%) scale(1); }
+            50% { opacity: 0.5; transform: translate(-50%, -50%) scale(1.2); }
+        }
+
+        .product-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: var(--transition);
+        }
+
+        .product-card:hover .product-overlay {
+            opacity: 1;
+        }
+
+        .quick-view {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            font-weight: 600;
+            transition: var(--transition);
+            text-transform: uppercase;
+        }
+
+        .quick-view:hover {
+            background: var(--accent-color);
+            color: var(--dark-color);
+        }
+
+        .product-info {
+            padding: 2rem;
+        }
+
+        .product-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: white;
+        }
+
+        .product-description {
+            color: #B0B0B0;
+            margin-bottom: 1.5rem;
+            font-size: 0.9rem;
+        }
+
+        .tech-features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .tech-tag {
+            background: rgba(33, 150, 243, 0.2);
+            color: var(--primary-color);
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            border: 1px solid rgba(33, 150, 243, 0.3);
+        }
+
+        .product-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .product-price {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: white;
+        }
+
+        .add-to-cart {
+            background: var(--gradient);
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            font-weight: 600;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+        }
+
+        .add-to-cart:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--glow);
+        }
+
+        /* Tech Features Section */
+        .tech-features {
+            padding: 5rem 0;
+            background: var(--light-color);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-item {
+            text-align: center;
+            padding: 2.5rem 1.5rem;
+            background: var(--dark-color);
+            border-radius: var(--border-radius);
+            transition: var(--transition);
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .feature-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.4), var(--glow);
+            border-color: var(--primary-color);
+        }
+
+        .feature-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--gradient);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            font-size: 2rem;
+            color: white;
+            box-shadow: var(--glow);
+        }
+
+        .feature-item h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: white;
+        }
+
+        .feature-item p {
+            color: #B0B0B0;
+            line-height: 1.6;
+        }
+
+        /* Demo Section */
+        .demo {
+            padding: 6rem 0;
+            background: var(--dark-color);
+        }
+
+        .demo-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .demo-content {
+            padding-right: 2rem;
+        }
+
+        .demo-description {
+            color: #B0B0B0;
+            margin-bottom: 2rem;
+            line-height: 1.8;
+            font-size: 1.1rem;
+        }
+
+        .demo-features {
+            list-style: none;
+        }
+
+        .demo-features li {
+            margin-bottom: 1rem;
+            color: #B0B0B0;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .demo-features i {
+            color: var(--primary-color);
+            font-size: 1.2rem;
+        }
+
+        .tech-form {
+            background: var(--light-color);
+            padding: 2.5rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .tech-form h3 {
+            color: white;
+            margin-bottom: 2rem;
+            text-align: center;
+            font-size: 1.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 1rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: var(--border-radius);
+            background: var(--dark-color);
+            color: white;
+            font-family: inherit;
+            transition: var(--transition);
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: var(--glow);
+        }
+
+        .submit-btn {
+            background: var(--gradient);
+            color: white;
+            border: none;
+            padding: 1.2rem 2.5rem;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            font-weight: 600;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            width: 100%;
+            justify-content: center;
+            text-transform: uppercase;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--glow);
+        }
+
+        /* Stats Section */
+        .tech-stats {
+            padding: 5rem 0;
+            background: var(--light-color);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 2rem;
+            background: var(--dark-color);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: #B0B0B0;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Testimonials Section */
+        .testimonials {
+            padding: 6rem 0;
+            background: var(--dark-color);
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 2rem;
+        }
+
+        .testimonial-item {
+            background: var(--light-color);
+            padding: 2.5rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .testimonial-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.4), var(--glow);
+        }
+
+        .testimonial-content {
+            color: #B0B0B0;
+            font-style: italic;
+            margin-bottom: 2rem;
+            line-height: 1.8;
+            font-size: 1.1rem;
+            position: relative;
+        }
+
+        .testimonial-content:before {
+            content: '"';
+            font-size: 4rem;
+            color: var(--primary-color);
+            opacity: 0.2;
+            position: absolute;
+            top: -20px;
+            left: -10px;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            background: var(--gradient);
+            border-radius: 50%;
+        }
+
+        .author-info h4 {
+            color: white;
+            margin-bottom: 0.3rem;
+        }
+
+        .author-info p {
+            color: #B0B0B0;
+            font-size: 0.9rem;
+        }
+
+        /* FAQ Section */
+        .faq {
+            padding: 6rem 0;
+            background: var(--light-color);
+        }
+
+        .faq-grid {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            background: var(--dark-color);
+            border-radius: var(--border-radius);
+            margin-bottom: 1rem;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .faq-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3), var(--glow);
+        }
+
+        .faq-question {
+            padding: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            font-weight: 600;
+            color: white;
+            background: var(--dark-color);
+        }
+
+        .faq-answer {
+            padding: 0 1.5rem 1.5rem;
+            display: none;
+            color: #B0B0B0;
+            line-height: 1.6;
+        }
+
+        .faq-active .faq-answer {
+            display: block;
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: 6rem 0;
+            background: var(--dark-color);
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+        }
+
+        .contact-info-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 2.5rem;
+        }
+
+        .contact-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--gradient);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1.5rem;
+            color: white;
+            font-size: 1.2rem;
+            box-shadow: var(--glow);
+        }
+
+        .contact-details h4 {
+            color: white;
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-details p {
+            color: #B0B0B0;
+        }
+
+        .contact-form {
+            background: var(--light-color);
+            padding: 2.5rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 1rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: var(--border-radius);
+            background: var(--dark-color);
+            color: white;
+            font-family: inherit;
+            transition: var(--transition);
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: var(--glow);
+        }
+
+        .form-group textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        /* CTA Section */
+        .cta {
+            background: linear-gradient(135deg, var(--secondary-color) 0%, var(--primary-color) 100%);
+            color: white;
+            padding: 5rem 0;
+            text-align: center;
+        }
+
+        .cta-content {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .cta h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .cta p {
+            margin-bottom: 2.5rem;
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .cta-actions {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--dark-color);
+            color: #B0B0B0;
+            padding: 4rem 0 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-section h3 {
+            color: white;
+            margin-bottom: 1.5rem;
+            font-size: 1.2rem;
+        }
+
+        .footer-section p,
+        .footer-section a {
+            color: #B0B0B0;
+            margin-bottom: 0.8rem;
+            display: block;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .footer-section a:hover {
+            color: var(--primary-color);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #666;
+        }
+
+        /* Animations */
+        [data-aos] {
+            opacity: 0;
+            transition: all 0.8s ease;
+        }
+
+        [data-aos].aos-animate {
+            opacity: 1;
+        }
+
+        [data-aos="fade-up"] {
+            transform: translateY(50px);
+        }
+
+        [data-aos="fade-up"].aos-animate {
+            transform: translateY(0);
+        }
+
+        [data-aos="fade-right"] {
+            transform: translateX(-50px);
+        }
+
+        [data-aos="fade-right"].aos-animate {
+            transform: translateX(0);
+        }
+
+        [data-aos="fade-left"] {
+            transform: translateX(50px);
+        }
+
+        [data-aos="fade-left"].aos-animate {
+            transform: translateX(0);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .demo-grid,
+            .contact-grid {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+            
+            .hero-visual {
+                display: none;
+            }
+            
+            .hero-content {
+                max-width: 100%;
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .tech-hero {
+                padding: 8rem 0 4rem;
+            }
+            
+            .tech-hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero-actions,
+            .cta-actions {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            
+            .testimonials-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .tech-hero h1 {
+                font-size: 2rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .product-footer {
+                flex-direction: column;
+                gap: 1rem;
+                align-items: flex-start;
+            }
+            
+            .add-to-cart {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">glower</div>
+            <ul class="nav-menu">
+                <li><a href="#home" class="nav-link">Home</a></li>
+                <li><a href="#products" class="nav-link">Products</a></li>
+                <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#faq" class="nav-link">FAQ</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+                <li class="cart-icon" id="cart-icon">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count">0</span>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main>
+            <!-- Hero Section -->
+    <section class="tech-hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1 data-aos="fade-up">glower</h1>
+                <p class="hero-subtitle" data-aos="fade-up" data-aos-delay="100">Innovative Tech Solutions</p>
+                <p class="hero-description" data-aos="fade-up" data-aos-delay="200">Cutting-edge technology for teens who embrace the future</p>
+                <div class="hero-actions" data-aos="fade-up" data-aos-delay="300">
+                    <a href="#products" class="btn btn-primary">Explore Products</a>
+                    <a href="#demo" class="btn btn-secondary">Request Demo</a>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="tech-animation">
+                    <div class="orbiting-circle"></div>
+                    <div class="orbiting-circle"></div>
+                    <div class="central-element"></div>
+                    <div class="grid-lines"></div>
+                </div>
+            </div>
+        </div>
+        <div class="particles-container"></div>
+    </section>
+
+    <!-- Products Section -->
+    <section id="products" class="products">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title" data-aos="fade-up">Advanced Technology Products</h2>
+                <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100">Next-generation solutions for modern challenges</p>
+            </div>
+            <div class="products-grid">
+                                
+                                                <div class="product-card" data-aos="fade-up" data-aos-delay="0" data-color="0D47A1">
+                    <div class="tech-badge">NEW TECH</div>
+                    <div class="product-image-container">
+                        <div class="tech-image-placeholder">
+                            <div class="circuit-pattern"></div>
+                            <div class="glow-effect"></div>
+                        </div>
+                        <div class="product-overlay">
+                            <button class="quick-view">View Details</button>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">courses</h3>
+                        <p class="product-description">Advanced Tech technology with AI integration</p>
+                        <div class="tech-features">
+                            <span class="tech-tag">AI-Powered</span>
+                            <span class="tech-tag">Cloud-Based</span>
+                            <span class="tech-tag">Secure</span>
+                        </div>
+                        <div class="product-footer">
+                            <p class="product-price">$119.00</p>
+                            <button class="add-to-cart" 
+                                    data-product="courses" 
+                                    data-price="728">
+                                <i class="fas fa-microchip"></i>
+                                Add to Cart
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                                                <div class="product-card" data-aos="fade-up" data-aos-delay="100" data-color="1565C0">
+                    <div class="tech-badge">NEW TECH</div>
+                    <div class="product-image-container">
+                        <div class="tech-image-placeholder">
+                            <div class="circuit-pattern"></div>
+                            <div class="glow-effect"></div>
+                        </div>
+                        <div class="product-overlay">
+                            <button class="quick-view">View Details</button>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Elite courses</h3>
+                        <p class="product-description">Advanced Tech technology with AI integration</p>
+                        <div class="tech-features">
+                            <span class="tech-tag">AI-Powered</span>
+                            <span class="tech-tag">Cloud-Based</span>
+                            <span class="tech-tag">Secure</span>
+                        </div>
+                        <div class="product-footer">
+                            <p class="product-price">$315.00</p>
+                            <button class="add-to-cart" 
+                                    data-product="Elite courses" 
+                                    data-price="250">
+                                <i class="fas fa-microchip"></i>
+                                Add to Cart
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                                                <div class="product-card" data-aos="fade-up" data-aos-delay="200" data-color="1976D2">
+                    <div class="tech-badge">NEW TECH</div>
+                    <div class="product-image-container">
+                        <div class="tech-image-placeholder">
+                            <div class="circuit-pattern"></div>
+                            <div class="glow-effect"></div>
+                        </div>
+                        <div class="product-overlay">
+                            <button class="quick-view">View Details</button>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Advanced courses</h3>
+                        <p class="product-description">Advanced Tech technology with AI integration</p>
+                        <div class="tech-features">
+                            <span class="tech-tag">AI-Powered</span>
+                            <span class="tech-tag">Cloud-Based</span>
+                            <span class="tech-tag">Secure</span>
+                        </div>
+                        <div class="product-footer">
+                            <p class="product-price">$593.00</p>
+                            <button class="add-to-cart" 
+                                    data-product="Advanced courses" 
+                                    data-price="468">
+                                <i class="fas fa-microchip"></i>
+                                Add to Cart
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                                                <div class="product-card" data-aos="fade-up" data-aos-delay="300" data-color="1E88E5">
+                    <div class="tech-badge">NEW TECH</div>
+                    <div class="product-image-container">
+                        <div class="tech-image-placeholder">
+                            <div class="circuit-pattern"></div>
+                            <div class="glow-effect"></div>
+                        </div>
+                        <div class="product-overlay">
+                            <button class="quick-view">View Details</button>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Next-Gen courses</h3>
+                        <p class="product-description">Advanced Tech technology with AI integration</p>
+                        <div class="tech-features">
+                            <span class="tech-tag">AI-Powered</span>
+                            <span class="tech-tag">Cloud-Based</span>
+                            <span class="tech-tag">Secure</span>
+                        </div>
+                        <div class="product-footer">
+                            <p class="product-price">$243.00</p>
+                            <button class="add-to-cart" 
+                                    data-product="Next-Gen courses" 
+                                    data-price="840">
+                                <i class="fas fa-microchip"></i>
+                                Add to Cart
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                                                <div class="product-card" data-aos="fade-up" data-aos-delay="400" data-color="2196F3">
+                    <div class="tech-badge">NEW TECH</div>
+                    <div class="product-image-container">
+                        <div class="tech-image-placeholder">
+                            <div class="circuit-pattern"></div>
+                            <div class="glow-effect"></div>
+                        </div>
+                        <div class="product-overlay">
+                            <button class="quick-view">View Details</button>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">AI-Powered courses</h3>
+                        <p class="product-description">Advanced Tech technology with AI integration</p>
+                        <div class="tech-features">
+                            <span class="tech-tag">AI-Powered</span>
+                            <span class="tech-tag">Cloud-Based</span>
+                            <span class="tech-tag">Secure</span>
+                        </div>
+                        <div class="product-footer">
+                            <p class="product-price">$771.00</p>
+                            <button class="add-to-cart" 
+                                    data-product="AI-Powered courses" 
+                                    data-price="879">
+                                <i class="fas fa-microchip"></i>
+                                Add to Cart
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                                                <div class="product-card" data-aos="fade-up" data-aos-delay="500" data-color="42A5F5">
+                    <div class="tech-badge">NEW TECH</div>
+                    <div class="product-image-container">
+                        <div class="tech-image-placeholder">
+                            <div class="circuit-pattern"></div>
+                            <div class="glow-effect"></div>
+                        </div>
+                        <div class="product-overlay">
+                            <button class="quick-view">View Details</button>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Smart courses</h3>
+                        <p class="product-description">Advanced Tech technology with AI integration</p>
+                        <div class="tech-features">
+                            <span class="tech-tag">AI-Powered</span>
+                            <span class="tech-tag">Cloud-Based</span>
+                            <span class="tech-tag">Secure</span>
+                        </div>
+                        <div class="product-footer">
+                            <p class="product-price">$338.00</p>
+                            <button class="add-to-cart" 
+                                    data-product="Smart courses" 
+                                    data-price="987">
+                                <i class="fas fa-microchip"></i>
+                                Add to Cart
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="tech-features">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title" data-aos="fade-up">Cutting-Edge Features</h2>
+                <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100">Powered by innovation and advanced technology</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-item" data-aos="fade-up" data-aos-delay="0">
+                    <div class="feature-icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h3>Artificial Intelligence</h3>
+                    <p>Advanced AI algorithms that learn and adapt to your needs</p>
+                </div>
+                <div class="feature-item" data-aos="fade-up" data-aos-delay="100">
+                    <div class="feature-icon">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <h3>Lightning Fast</h3>
+                    <p>Optimized for speed and performance with minimal latency</p>
+                </div>
+                <div class="feature-item" data-aos="fade-up" data-aos-delay="200">
+                    <div class="feature-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>Military-Grade Security</h3>
+                    <p>Enterprise-level security protocols to protect your data</p>
+                </div>
+                <div class="feature-item" data-aos="fade-up" data-aos-delay="300">
+                    <div class="feature-icon">
+                        <i class="fas fa-sync-alt"></i>
+                    </div>
+                    <h3>Seamless Integration</h3>
+                    <p>Compatible with all major platforms and systems</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Demo Section -->
+    <section id="demo" class="demo">
+        <div class="container">
+            <div class="demo-grid">
+                <div class="demo-content" data-aos="fade-right">
+                    <h2 class="section-title">Experience the Future</h2>
+                    <p class="demo-description">
+                        See how our technology can transform your workflow. Request a personalized demo 
+                        and experience the power of our courses firsthand.
+                    </p>
+                    <ul class="demo-features">
+                        <li><i class="fas fa-check-circle"></i> Live product demonstration</li>
+                        <li><i class="fas fa-check-circle"></i> Technical consultation</li>
+                        <li><i class="fas fa-check-circle"></i> Customized solution planning</li>
+                        <li><i class="fas fa-check-circle"></i> Implementation roadmap</li>
+                    </ul>
+                </div>
+                <div class="demo-form-container" data-aos="fade-left">
+                    <div class="tech-form">
+                        <h3>Request a Demo</h3>
+                        <form id="demoForm">
+                            <div class="form-group">
+                                <input type="text" placeholder="Full Name" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="email" placeholder="Work Email" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" placeholder="Company Name" required>
+                            </div>
+                            <div class="form-group">
+                                <select required>
+                                    <option value="" disabled selected>Product Interest</option>
+                                                                        <option value="courses">courses</option>
+                                                                    </select>
+                            </div>
+                            <button type="submit" class="submit-btn">
+                                <i class="fas fa-rocket"></i>
+                                Schedule Demo
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="tech-stats">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-item" data-aos="fade-up" data-aos-delay="0">
+                    <div class="stat-number" data-count="99.9">0</div>
+                    <div class="stat-label">Uptime</div>
+                </div>
+                <div class="stat-item" data-aos="fade-up" data-aos-delay="100">
+                    <div class="stat-number" data-count="1500">0</div>
+                    <div class="stat-label">Clients Served</div>
+                </div>
+                <div class="stat-item" data-aos="fade-up" data-aos-delay="200">
+                    <div class="stat-number" data-count="24">0</div>
+                    <div class="stat-label">Response Time (hrs)</div>
+                </div>
+                <div class="stat-item" data-aos="fade-up" data-aos-delay="300">
+                    <div class="stat-number" data-count="98">0</div>
+                    <div class="stat-label">Client Satisfaction</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title" data-aos="fade-up">Tech Leaders Love Us</h2>
+                <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100">What industry professionals say about our technology</p>
+            </div>
+            <div class="testimonials-grid">
+                <div class="testimonial-item" data-aos="fade-up" data-aos-delay="0">
+                    <div class="testimonial-content">
+                        <p>"The courses from glower have revolutionized our workflow. The AI integration and seamless performance exceeded our highest expectations."</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div classauthor-avatar></div>
+                        <div class="author-info">
+                            <h4>Sarah Chen</h4>
+                            <p>CTO, TechInnovate Inc.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-item" data-aos="fade-up" data-aos-delay="100">
+                    <div class="testimonial-content">
+                        <p>"Implementing glower's solutions was the best decision we made last quarter. The scalability and security features are unmatched in the industry."</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar"></div>
+                        <div class="author-info">
+                            <h4>Marcus Johnson</h4>
+                            <p>IT Director, FutureTech Corp</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq" class="faq">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title" data-aos="fade-up">Technical Questions</h2>
+                <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100">Everything you need to know about our technology</p>
+            </div>
+            
+            <div class="faq-grid">
+                <div class="faq-item" data-aos="fade-up" data-aos-delay="0">
+                    <div class="faq-question">
+                        <span>What technology stack do you use?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>We utilize cutting-edge technologies including AI/ML frameworks, cloud-native architecture, and advanced security protocols. Our stack is built for scalability, performance, and future-proofing.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item" data-aos="fade-up" data-aos-delay="100">
+                    <div class="faq-question">
+                        <span>How often do you release updates?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>We follow an agile development process with bi-weekly updates and quarterly major releases. All updates include backward compatibility and detailed migration guides when needed.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item" data-aos="fade-up" data-aos-delay="200">
+                    <div class="faq-question">
+                        <span>Do you offer API access?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Yes, we provide comprehensive RESTful APIs with full documentation, SDKs for popular languages, and dedicated technical support for integration projects.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item" data-aos="fade-up" data-aos-delay="300">
+                    <div class="faq-question">
+                        <span>What security certifications do you have?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>We maintain SOC 2 Type II, ISO 27001, and GDPR compliance. Our infrastructure undergoes regular penetration testing and security audits by third-party experts.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title" data-aos="fade-up">Get in Touch</h2>
+                <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100">Our tech team is ready to assist you</p>
+            </div>
+            
+            <div class="contact-grid">
+                <div class="contact-info">
+                    <div class="contact-info-item" data-aos="fade-up" data-aos-delay="0">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h4>Email</h4>
+                            <p>glower@gmail.com</p>
+                        </div>
+                    </div>
+                    <div class="contact-info-item" data-aos="fade-up" data-aos-delay="100">
+                        <div class="contact-icon">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h4>Support</h4>
+                            <p>(555) 123-TECH</p>
+                        </div>
+                    </div>
+                    <div class="contact-info-item" data-aos="fade-up" data-aos-delay="200">
+                        <div class="contact-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h4>Support Hours</h4>
+                            <p>24/7 Technical Support<br>Enterprise SLA Available</p>
+                        </div>
+                    </div>
+                    <div class="contact-info-item" data-aos="fade-up" data-aos-delay="300">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h4>HQ Location</h4>
+                            <p>Tech Innovation District<br>San Francisco, CA 94105</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="contact-form-container" data-aos="fade-up" data-aos-delay="400">
+                    <form id="contactForm" class="contact-form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <input type="text" placeholder="Your Name" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="email" placeholder="Email Address" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" placeholder="Company" required>
+                        </div>
+                        <div class="form-group">
+                            <select required>
+                                <option value="" disabled selected>Department</option>
+                                <option>IT</option>
+                                <option>Engineering</option>
+                                <option>Operations</option>
+                                <option>Executive</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <textarea placeholder="Technical Requirements" rows="5" required></textarea>
+                        </div>
+                        <button type="submit" class="submit-btn">
+                            <i class="fas fa-paper-plane"></i>
+                            Send Message
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta">
+        <div class="container">
+            <div class="cta-content" data-aos="fade-up">
+                <h2>Ready to Transform Your Technology Stack?</h2>
+                <p>Join thousands of companies using our cutting-edge solutions</p>
+                <div class="cta-actions">
+                    <a href="#products" class="btn btn-primary">View Products</a>
+                    <a href="#contact" class="btn btn-secondary">Contact Sales</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3>glower</h3>
+                <p>Providing quality courses for teens.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <a href="#home">Home</a>
+                <a href="#products">Products</a>
+                <a href="#about">About</a>
+                <a href="#contact">Contact</a>
+            </div>
+            <div class="footer-section">
+                <h3>Contact Info</h3>
+                <p>Email: glower@gmail.com</p>
+                <p>Phone: (555) 123-4567</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 glower. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Shopping Cart Sidebar -->
+    <div class="cart-sidebar" id="cart-sidebar">
+        <div class="cart-header">
+            <h3>Your Cart</h3>
+            <button id="close-cart">&times;</button>
+        </div>
+        <div class="cart-items" id="cart-items">
+            <!-- Cart items will be added here dynamically -->
+        </div>
+        <div class="cart-total">
+            <span>Total:</span>
+            <span id="cart-total">$0.00</span>
+        </div>
+        <button class="checkout-btn">Proceed to Checkout</button>
+    </div>
+
+    <!-- Overlay -->
+    <div class="overlay" id="overlay"></div>
+
+    <!-- JavaScript -->
+    <script>
+        // Ecommerce functionality
+        let cart = [];
+        const cartIcon = document.getElementById('cart-icon');
+        const cartSidebar = document.getElementById('cart-sidebar');
+        const closeCart = document.getElementById('close-cart');
+        const overlay = document.getElementById('overlay');
+        const cartItems = document.getElementById('cart-items');
+        const cartTotal = document.getElementById('cart-total');
+        const cartCount = document.querySelector('.cart-count');
+
+        // Cart functionality
+        cartIcon.addEventListener('click', () => {
+            cartSidebar.classList.add('open');
+            overlay.style.display = 'block';
+        });
+
+        closeCart.addEventListener('click', () => {
+            cartSidebar.classList.remove('open');
+            overlay.style.display = 'none';
+        });
+
+        overlay.addEventListener('click', () => {
+            cartSidebar.classList.remove('open');
+            overlay.style.display = 'none';
+        });
+
+        // Add to cart functionality
+        document.addEventListener('click', (e) => {
+            if (e.target.classList.contains('add-to-cart')) {
+                const product = e.target.dataset.product;
+                const price = parseFloat(e.target.dataset.price);
+                const image = e.target.dataset.image;
+                
+                const existingItem = cart.find(item => item.product === product);
+                
+                if (existingItem) {
+                    existingItem.quantity += 1;
+                } else {
+                    cart.push({
+                        product,
+                        price,
+                        image,
+                        quantity: 1
+                    });
+                }
+                
+                updateCart();
+                
+                // Show cart sidebar
+                cartSidebar.classList.add('open');
+                overlay.style.display = 'block';
+            }
+        });
+
+        function updateCart() {
+            // Clear cart items
+            cartItems.innerHTML = '';
+            
+            let total = 0;
+            let count = 0;
+            
+            // Add items to cart
+            cart.forEach(item => {
+                const itemTotal = item.price * item.quantity;
+                total += itemTotal;
+                count += item.quantity;
+                
+                const cartItem = document.createElement('div');
+                cartItem.className = 'cart-item';
+                cartItem.innerHTML = `
+                    <img src="${item.image}" alt="${item.product}" class="cart-item-image">
+                    <div class="cart-item-details">
+                        <h4>${item.product}</h4>
+                        <p>$${item.price} x ${item.quantity}</p>
+                    </div>
+                    <button class="cart-item-remove" data-product="${item.product}">&times;</button>
+                `;
+                
+                cartItems.appendChild(cartItem);
+            });
+            
+            // Update total and count
+            cartTotal.textContent = `$${total.toFixed(2)}`;
+            cartCount.textContent = count;
+            
+            // Add event listeners to remove buttons
+            document.querySelectorAll('.cart-item-remove').forEach(button => {
+                button.addEventListener('click', () => {
+                    const product = button.dataset.product;
+                    cart = cart.filter(item => item.product !== product);
+                    updateCart();
+                });
+            });
+        }
+
+        // Form validation
+        document.addEventListener('DOMContentLoaded', function() {
+            const contactForm = document.getElementById('contactForm');
+            if (contactForm) {
+                contactForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    alert('Thank you for your message! We will get back to you soon.');
+                    this.reset();
+                });
+            }
+
+            const newsletterForm = document.getElementById('newsletterForm');
+            if (newsletterForm) {
+                newsletterForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    alert('Thank you for subscribing to our newsletter!');
+                    this.reset();
+                });
+            }
+
+            // FAQ functionality
+            document.querySelectorAll('.faq-question').forEach(question => {
+                question.addEventListener('click', () => {
+                    const item = question.parentElement;
+                    item.classList.toggle('faq-active');
+                });
+            });
+        });
+    </script>
+</body>
+</html>
